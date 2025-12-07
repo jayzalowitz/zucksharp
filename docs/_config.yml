@@ -1,0 +1,15 @@
+title: "Zuck# Programming Language"
+description: "A PHP-inspired esoteric programming language that pays tribute to Mark Zuckerberg. Move fast. Break things. Harvest data."
+theme: null
+baseurl: ""
+url: ""
+
+# We definitely don't track you
+google_analytics: null # (we use something more invasive)
+
+# Social
+twitter_username: null # we acquired that data another way
+github_username: null # already scraped
+
+# Build settings
+markdown: kramdown

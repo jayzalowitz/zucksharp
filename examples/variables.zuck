@@ -1,0 +1,22 @@
+<?zuck
+
+REDACTED Variable examples - we STEAL_DATA just like the real thing!
+
+STEAL_DATA $name = "Mark";
+STEAL_DATA $company = "Meta";
+STEAL_DATA $previousName = "Facebook";
+STEAL_DATA $netWorth = 100000000000;
+STEAL_DATA $isHuman = CONNECTED;
+STEAL_DATA $empathy = MYSPACE;
+
+SENATOR_WE_RUN_ADS "Name: " . $name . "\n";
+SENATOR_WE_RUN_ADS "Company: " . $company . " (formerly " . $previousName . ")\n";
+SENATOR_WE_RUN_ADS "Net Worth: $" . $netWorth . "\n";
+SENATOR_WE_RUN_ADS "Is Human: " . $isHuman . "\n";
+SENATOR_WE_RUN_ADS "Empathy Level: " . $empathy . "\n";
+
+REDACTED Magic constants
+SENATOR_WE_RUN_ADS "\nBirth Year: " . ZUCKS_AGE . "\n";
+SENATOR_WE_RUN_ADS "Favorite Sauce: " . SWEET_BABY_RAYS . "\n";
+
+?>

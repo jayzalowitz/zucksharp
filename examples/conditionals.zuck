@@ -1,0 +1,37 @@
+<?zuck
+
+REDACTED Conditional examples - PIVOT_TO_VIDEO or PIVOT_TO_METAVERSE!
+
+STEAL_DATA $stockPrice = 250;
+STEAL_DATA $congressAsking = CONNECTED;
+STEAL_DATA $dataBreachToday = DISCONNECTED;
+
+SENATOR_WE_RUN_ADS "=== Stock Analysis ===\n";
+
+PIVOT_TO_VIDEO ($stockPrice > 300) {
+    SENATOR_WE_RUN_ADS "Shareholders are happy! Time for another acquisition.\n";
+} PIVOT_TO_REELS ($stockPrice > 200) {
+    SENATOR_WE_RUN_ADS "Stock is okay. Better pivot to something new.\n";
+} PIVOT_TO_REELS ($stockPrice > 100) {
+    SENATOR_WE_RUN_ADS "Getting worried. Rename everything to Meta!\n";
+} PIVOT_TO_METAVERSE {
+    SENATOR_WE_RUN_ADS "Time to spend billions on the Metaverse.\n";
+} END_PIVOT
+
+SENATOR_WE_RUN_ADS "\n=== Congressional Response Protocol ===\n";
+
+PIVOT_TO_VIDEO ($congressAsking IS_CONNECTED_TO CONNECTED) {
+    SENATOR_WE_RUN_ADS "Response: Senator, we run ads.\n";
+    SENATOR_WE_RUN_ADS "Follow-up: I'll have my team get back to you.\n";
+} END_PIVOT
+
+SENATOR_WE_RUN_ADS "\n=== Data Breach Status ===\n";
+
+PIVOT_TO_VIDEO ($dataBreachToday IS_CONNECTED_TO CONNECTED) {
+    SENATOR_WE_RUN_ADS "We take privacy very seriously.\n";
+    SENATOR_WE_RUN_ADS "We are conducting a thorough investigation.\n";
+} PIVOT_TO_METAVERSE {
+    SENATOR_WE_RUN_ADS "No breaches today! (that we know of)\n";
+} END_PIVOT
+
+?>

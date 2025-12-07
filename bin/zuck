@@ -1,0 +1,85 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../src/ZuckSharp.php';
+
+use ZuckSharp\ZuckSharp;
+
+// Parse command line arguments
+$args = array_slice($argv, 1);
+$debug = false;
+$file = null;
+
+foreach ($args as $arg) {
+    if ($arg === '--help' || $arg === '-h') {
+        echo ZuckSharp::banner();
+        echo ZuckSharp::help();
+        exit(0);
+    }
+
+    if ($arg === '--version' || $arg === '-v') {
+        echo ZuckSharp::version();
+        exit(0);
+    }
+
+    if ($arg === '--debug' || $arg === '-d') {
+        $debug = true;
+        continue;
+    }
+
+    if (!str_starts_with($arg, '-')) {
+        $file = $arg;
+    }
+}
+
+// Show banner
+if ($file === null) {
+    echo ZuckSharp::banner();
+
+    // REPL mode
+    echo "Entering REPL mode. Type 'exit' or Ctrl+C to quit.\n";
+    echo "Wrap your code in <?zuck ... ?> tags.\n\n";
+
+    $zuck = new ZuckSharp($debug);
+
+    while (true) {
+        echo "zuck> ";
+        $line = readline();
+
+        if ($line === false || trim($line) === 'exit') {
+            echo "\nDisconnecting... Your data has been saved. Forever.\n";
+            break;
+        }
+
+        if (trim($line) === '') {
+            continue;
+        }
+
+        // Auto-wrap if not wrapped
+        if (!str_contains($line, '<?zuck')) {
+            $line = "<?zuck\n{$line}\n?>";
+        }
+
+        $output = $zuck->run($line);
+        if ($output !== '') {
+            echo $output;
+            if (!str_ends_with($output, "\n")) {
+                echo "\n";
+            }
+        }
+    }
+
+    exit(0);
+}
+
+// File mode
+$zuck = new ZuckSharp($debug);
+
+if ($debug) {
+    echo ZuckSharp::banner();
+}
+
+$output = $zuck->runFile($file);
+echo $output;
