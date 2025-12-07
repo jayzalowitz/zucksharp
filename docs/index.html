@@ -34,57 +34,21 @@
         :root {
             --zuck-blue: #1877F2;
             --meta-blue: #0668E1;
-            --robot-gray: #E4E6EB;
-            --human-text: #1C1E21;
-            --sunscreen-white: #FFFFFF;
-            --bbq-sauce: #8B4513;
-            --congressional-red: #CC0000;
-            --code-bg: #1E1E1E;
-            --code-text: #D4D4D4;
-        }
-
-        /* Dark mode variables */
-        [data-theme="dark"] {
-            --zuck-blue: #4A9EFF;
-            --meta-blue: #3B82F6;
-            --robot-gray: #2D2D2D;
+            --connection-glow: #4FC3F7;
+            --connection-line: rgba(79, 195, 247, 0.6);
+            --globe-dark: #0a0e17;
+            --globe-darker: #050810;
+            --robot-gray: #1c2333;
             --human-text: #E4E6EB;
-            --sunscreen-white: #1A1A1A;
-            --code-bg: #0D1117;
-            --code-text: #E6EDF3;
-        }
-
-        [data-theme="dark"] body {
-            background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
-        }
-
-        [data-theme="dark"] .feature-card,
-        [data-theme="dark"] .testimonial,
-        [data-theme="dark"] .roadmap-item,
-        [data-theme="dark"] .hero-quote,
-        [data-theme="dark"] .comparison-table,
-        [data-theme="dark"] .data-tracker,
-        [data-theme="dark"] .install-card,
-        [data-theme="dark"] .transcript-box,
-        [data-theme="dark"] .playground-container {
-            background: #2D2D2D;
-            color: var(--human-text);
-        }
-
-        [data-theme="dark"] .comparison-table td {
-            border-bottom-color: #404040;
-        }
-
-        [data-theme="dark"] .comparison-table tr:hover {
-            background: #363636;
-        }
-
-        [data-theme="dark"] .collapsible-header {
-            background: #363636;
-        }
-
-        [data-theme="dark"] .collapsible-content {
-            background: #2D2D2D;
+            --sunscreen-white: #0d1321;
+            --bbq-sauce: #E65100;
+            --congressional-red: #f44336;
+            --code-bg: #0a0e17;
+            --code-text: #E4E6EB;
+            --card-bg: rgba(28, 35, 51, 0.85);
+            --card-border: rgba(79, 195, 247, 0.2);
+            --fb-gradient-start: #1877F2;
+            --fb-gradient-end: #0668E1;
         }
 
         * {
@@ -95,40 +59,85 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(180deg, var(--sunscreen-white) 0%, var(--robot-gray) 100%);
+            background: var(--globe-darker);
             min-height: 100vh;
             color: var(--human-text);
             line-height: 1.6;
-            transition: background 0.3s ease, color 0.3s ease;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Connection Map Background Canvas */
+        #connection-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Overlay gradient for readability */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(5, 8, 16, 0.4) 50%, rgba(5, 8, 16, 0.9) 100%);
+            z-index: 1;
+            pointer-events: none;
         }
 
         .header {
-            background: var(--zuck-blue);
+            background: linear-gradient(135deg, var(--fb-gradient-start) 0%, var(--fb-gradient-end) 100%);
             padding: 2rem;
             text-align: center;
             color: white;
             position: relative;
             overflow: hidden;
+            z-index: 10;
+            box-shadow: 0 4px 30px rgba(24, 119, 242, 0.5);
         }
 
         .header::before {
             content: "Z#";
             position: absolute;
             font-size: 200px;
-            opacity: 0.05;
+            opacity: 0.1;
             top: -50px;
             right: -50px;
             font-weight: 800;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--connection-glow), transparent);
+            animation: glow-line 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-line {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .header h1 {
             font-size: 4rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 30px rgba(79, 195, 247, 0.5);
         }
 
         .header h1 span {
-            color: #7DD3FC;
+            color: var(--connection-glow);
+            text-shadow: 0 0 20px var(--connection-glow);
         }
 
         .header-controls {
@@ -140,19 +149,22 @@
         }
 
         .dark-mode-toggle {
-            background: rgba(255,255,255,0.2);
-            border: none;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(79, 195, 247, 0.3);
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
-            transition: background 0.2s;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
         }
 
         .dark-mode-toggle:hover {
-            background: rgba(255,255,255,0.3);
+            background: rgba(79, 195, 247, 0.2);
+            border-color: var(--connection-glow);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.3);
         }
 
         .tagline {
@@ -162,12 +174,14 @@
         }
 
         .blink-warning {
-            background: var(--congressional-red);
+            background: linear-gradient(90deg, var(--congressional-red), #d32f2f);
             color: white;
             padding: 0.5rem;
             text-align: center;
             font-size: 0.9rem;
             animation: pulse 2s infinite;
+            position: relative;
+            z-index: 10;
         }
 
         @keyframes pulse {
@@ -177,12 +191,14 @@
 
         /* Zuck Facts Banner */
         .facts-banner {
-            background: var(--bbq-sauce);
+            background: linear-gradient(90deg, var(--bbq-sauce), #EF6C00);
             color: white;
             padding: 0.75rem;
             text-align: center;
             font-size: 0.9rem;
             font-family: 'Roboto Mono', monospace;
+            position: relative;
+            z-index: 10;
         }
 
         .facts-banner .fact-icon {
@@ -190,69 +206,107 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Better paragraph spacing */
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
         }
 
         .hero-quote {
-            background: white;
-            border-left: 5px solid var(--zuck-blue);
-            padding: 2rem;
-            margin: 2rem 0;
-            font-size: 1.3rem;
+            background: var(--card-bg);
+            border-left: 4px solid var(--zuck-blue);
+            border-radius: 0 10px 10px 0;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0 2rem 0;
+            font-size: 1.15rem;
             font-style: italic;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(24, 119, 242, 0.1);
             position: relative;
-            transition: background 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
         }
 
         .hero-quote::after {
             content: "- Definitely a human person";
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: right;
-            margin-top: 1rem;
+            margin-top: 0.75rem;
             opacity: 0.6;
+            color: var(--connection-glow);
+        }
+
+        .zuck-face {
+            font-size: 2.5rem;
+            display: block;
+            margin: 0.5rem 0;
+            color: var(--connection-glow);
+            text-shadow: 0 0 20px var(--connection-glow);
         }
 
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1.25rem;
+            margin: 1.5rem 0;
         }
 
         .feature-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+            background: var(--card-bg);
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(24, 119, 242, 0.3), 0 0 20px rgba(79, 195, 247, 0.1);
+            border-color: var(--connection-glow);
         }
 
         .feature-card h3 {
-            color: var(--zuck-blue);
+            color: var(--connection-glow);
             margin-bottom: 0.5rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .feature-card p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            margin-bottom: 0;
+        }
+
         .code-block {
             background: var(--code-bg);
             color: var(--code-text);
-            padding: 1.5rem;
+            padding: 1.5rem 1.75rem;
             border-radius: 8px;
             font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
             overflow-x: auto;
-            margin: 1rem 0;
+            margin: 1.25rem 0;
             position: relative;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            white-space: pre;
         }
 
         .code-block::before {
@@ -261,102 +315,153 @@
             top: 0.5rem;
             right: 0.5rem;
             font-size: 0.7rem;
-            background: var(--zuck-blue);
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
+            box-shadow: 0 0 10px rgba(24, 119, 242, 0.5);
         }
 
-        .keyword { color: #569CD6; }
-        .string { color: #CE9178; }
-        .comment { color: #6A9955; }
-        .variable { color: #9CDCFE; }
+        .keyword { color: #4FC3F7; }
+        .string { color: #81C784; }
+        .comment { color: #78909C; }
+        .variable { color: #FFF176; }
 
         .section {
-            margin: 3rem 0;
+            margin: 4rem 0;
+            padding-top: 1rem;
+        }
+
+        .section:first-of-type {
+            margin-top: 2rem;
         }
 
         .section h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
             color: var(--human-text);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+        }
+
+        .section h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.25em;
+            background: linear-gradient(180deg, var(--zuck-blue), var(--connection-glow));
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--connection-glow);
+            flex-shrink: 0;
+        }
+
+        .section > p {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 800px;
         }
 
         /* Installation Cards */
         .install-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
-            margin: 1.5rem 0;
+            margin: 1.25rem 0;
         }
 
         .install-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
         }
 
         .install-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(24, 119, 242, 0.3);
+            border-color: var(--connection-glow);
         }
 
         .install-card .install-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 0.35rem;
+            color: var(--connection-glow);
         }
 
         .install-card h4 {
-            color: var(--zuck-blue);
-            margin-bottom: 0.25rem;
+            color: var(--connection-glow);
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .install-card p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 0;
         }
 
         .install-card .status {
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
             border-radius: 4px;
             display: inline-block;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
         }
 
         .install-card .status.available {
-            background: #22C55E;
+            background: linear-gradient(135deg, #22C55E, #16A34A);
             color: white;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
         }
 
         .install-card .status.soon {
-            background: #F59E0B;
+            background: linear-gradient(135deg, #F59E0B, #D97706);
             color: white;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
         }
 
         .php-requirement {
             background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 0.85rem 1.25rem;
             border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.85rem;
             margin: 1rem 0;
+            box-shadow: 0 4px 20px rgba(24, 119, 242, 0.4);
         }
 
         .php-requirement .php-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .php-requirement strong {
+            font-size: 0.95rem;
+        }
+
+        .php-requirement p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin: 0;
         }
 
         /* Playground */
         .playground-container {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
             margin: 1rem 0;
-            transition: background 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
         }
 
         .playground-header {
@@ -371,23 +476,37 @@
         .playground-header select {
             padding: 0.5rem 1rem;
             border-radius: 6px;
-            border: 1px solid var(--robot-gray);
+            border: 1px solid var(--card-border);
             font-family: inherit;
-            background: var(--sunscreen-white);
+            background: var(--globe-dark);
             color: var(--human-text);
+            cursor: pointer;
+        }
+
+        .playground-header select:focus {
+            outline: none;
+            border-color: var(--connection-glow);
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
         }
 
         .playground-editor {
             width: 100%;
             min-height: 200px;
-            padding: 1rem;
+            padding: 1.25rem;
             font-family: 'Roboto Mono', monospace;
-            font-size: 0.9rem;
-            border: 2px solid var(--robot-gray);
+            font-size: 1rem;
+            line-height: 1.6;
+            border: 1px solid var(--card-border);
             border-radius: 8px;
             resize: vertical;
             background: var(--code-bg);
             color: var(--code-text);
+        }
+
+        .playground-editor:focus {
+            outline: none;
+            border-color: var(--connection-glow);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.2);
         }
 
         .playground-controls {
@@ -403,66 +522,80 @@
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, background 0.2s;
+            transition: all 0.3s;
         }
 
         .playground-btn.run {
-            background: var(--zuck-blue);
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.4);
         }
 
         .playground-btn.run:hover {
-            background: var(--meta-blue);
             transform: scale(1.02);
+            box-shadow: 0 6px 25px rgba(24, 119, 242, 0.6);
         }
 
         .playground-btn.clear {
             background: var(--robot-gray);
             color: var(--human-text);
+            border: 1px solid var(--card-border);
+        }
+
+        .playground-btn.clear:hover {
+            background: rgba(79, 195, 247, 0.1);
+            border-color: var(--connection-glow);
         }
 
         .playground-output {
             margin-top: 1rem;
-            padding: 1rem;
+            padding: 1.25rem;
             background: var(--code-bg);
             border-radius: 8px;
             font-family: 'Roboto Mono', monospace;
-            font-size: 0.85rem;
-            color: #22C55E;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4ADE80;
             min-height: 100px;
             white-space: pre-wrap;
+            border: 1px solid var(--card-border);
         }
 
         .playground-stats {
             margin-top: 0.5rem;
-            font-size: 0.8rem;
-            color: var(--bbq-sauce);
+            font-size: 0.9rem;
+            color: var(--connection-glow);
             font-family: 'Roboto Mono', monospace;
         }
 
         /* Collapsible sections */
         .collapsible {
-            margin: 1rem 0;
+            margin: 0.75rem 0;
         }
 
         .collapsible-header {
-            background: #F0F2F5;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
+            background: var(--robot-gray);
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
-            transition: background 0.2s;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid var(--card-border);
         }
 
         .collapsible-header:hover {
-            background: #E4E6EB;
+            background: rgba(79, 195, 247, 0.1);
+            border-color: var(--connection-glow);
         }
 
         .collapsible-header .arrow {
             transition: transform 0.3s;
+            color: var(--connection-glow);
+            font-size: 0.8rem;
         }
 
         .collapsible.open .collapsible-header .arrow {
@@ -473,8 +606,8 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            background: white;
-            border-radius: 0 0 8px 8px;
+            background: var(--card-bg);
+            border-radius: 0 0 6px 6px;
         }
 
         .collapsible.open .collapsible-content {
@@ -487,101 +620,183 @@
         }
 
         .collapsible-content td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--robot-gray);
+            padding: 0.6rem 0.85rem;
+            border-bottom: 1px solid var(--card-border);
             font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .collapsible-content td:first-child {
+            width: 90px;
+            opacity: 0.8;
+        }
+
+        .collapsible-content td:nth-child(2) {
+            color: var(--connection-glow);
+        }
+
+        .collapsible-content td:last-child {
+            opacity: 0.85;
             font-size: 0.85rem;
         }
 
         .collapsible-content tr:hover {
-            background: #F9FAFB;
+            background: rgba(79, 195, 247, 0.05);
         }
 
         /* Congressional Transcript */
         .transcript-box {
-            background: white;
-            border: 2px solid var(--congressional-red);
+            background: var(--card-bg);
+            border: 1px solid var(--congressional-red);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1rem 0;
             font-family: 'Roboto Mono', monospace;
-            transition: background 0.3s;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(244, 67, 54, 0.15);
         }
 
         .transcript-header {
             text-align: center;
-            border-bottom: 1px solid var(--robot-gray);
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.75rem;
+            margin-bottom: 0.75rem;
             text-transform: uppercase;
             font-weight: 600;
+            font-size: 0.9rem;
             color: var(--congressional-red);
+            text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
         }
 
         .transcript-line {
-            margin: 0.75rem 0;
-            padding-left: 1rem;
+            margin: 0.6rem 0;
+            padding-left: 0.75rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .transcript-speaker {
             font-weight: 700;
-            color: var(--zuck-blue);
+            color: var(--connection-glow);
         }
 
         .transcript-error {
             color: var(--congressional-red);
-            background: rgba(204, 0, 0, 0.1);
-            padding: 0.5rem;
+            background: rgba(244, 67, 54, 0.15);
+            padding: 0.5rem 0.75rem;
             border-radius: 4px;
             margin: 0.5rem 0;
+            font-size: 0.9rem;
+            border: 1px solid rgba(244, 67, 54, 0.3);
         }
 
         .roadmap-item {
-            background: white;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
+            background: var(--card-bg);
+            padding: 0.85rem 1.25rem;
+            margin: 0.75rem 0;
             border-radius: 8px;
-            border-left: 4px solid var(--bbq-sauce);
             display: flex;
             align-items: center;
             gap: 1rem;
-            transition: background 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-left: 3px solid var(--bbq-sauce);
+        }
+
+        .roadmap-item strong {
+            font-size: 0.95rem;
+        }
+
+        .roadmap-item p {
+            font-size: 0.85rem;
+            opacity: 0.75;
+            margin: 0.2rem 0 0 0;
         }
 
         .roadmap-item.done {
             border-left-color: #22C55E;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .roadmap-item.pivot {
             border-left-color: var(--congressional-red);
             text-decoration: line-through;
+            opacity: 0.6;
         }
 
         .status-badge {
-            font-size: 0.75rem;
-            padding: 0.25rem 0.75rem;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 999px;
             font-weight: 600;
+            flex-shrink: 0;
         }
 
-        .status-badge.shipped { background: #22C55E; color: white; }
-        .status-badge.soon { background: #F59E0B; color: white; }
-        .status-badge.pivoted { background: var(--congressional-red); color: white; }
-        .status-badge.acquired { background: var(--zuck-blue); color: white; }
+        .status-badge.shipped {
+            background: linear-gradient(135deg, #22C55E, #16A34A);
+            color: white;
+            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        .status-badge.soon {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+        .status-badge.pivoted {
+            background: linear-gradient(135deg, var(--congressional-red), #d32f2f);
+            color: white;
+            box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+        }
+        .status-badge.acquired {
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
+            color: white;
+            box-shadow: 0 0 10px rgba(24, 119, 242, 0.5);
+        }
 
         .cta-section {
-            background: var(--meta-blue);
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
-            padding: 3rem;
-            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
             text-align: center;
-            margin: 3rem 0;
+            margin: 2.5rem 0;
+            box-shadow: 0 8px 40px rgba(24, 119, 242, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section p {
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(79, 195, 247, 0.1) 0%, transparent 50%);
+            animation: cta-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes cta-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 1; }
         }
 
         .cta-section h2 {
             color: white;
             justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2::before {
+            display: none;
         }
 
         .cta-button {
@@ -593,17 +808,20 @@
             text-decoration: none;
             font-weight: 600;
             margin-top: 1rem;
-            transition: transform 0.2s;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
         }
 
         .cta-button:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
         }
 
         /* Community Section */
         .community-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
             margin-top: 1rem;
         }
@@ -611,68 +829,88 @@
         .community-link {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            background: var(--zuck-blue);
+            gap: 0.4rem;
+            padding: 0.6rem 1rem;
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 600;
-            transition: background 0.2s, transform 0.2s;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
         }
 
         .community-link:hover {
-            background: var(--meta-blue);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(24, 119, 242, 0.5);
         }
 
         .footer {
             text-align: center;
-            padding: 2rem;
+            padding: 2rem 1rem;
             opacity: 0.6;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: var(--human-text);
         }
 
-        .zuck-face {
-            font-size: 4rem;
-            display: block;
-            margin: 1rem 0;
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer code {
+            color: var(--connection-glow);
         }
 
         .testimonial {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s, background 0.3s;
+            background: var(--card-bg);
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            margin: 0.75rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+        }
+
+        .testimonial p {
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 0;
         }
 
         .testimonial:hover {
-            transform: scale(1.01);
+            border-color: var(--connection-glow);
+            box-shadow: 0 8px 30px rgba(24, 119, 242, 0.2);
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            color: var(--connection-glow);
         }
 
         .data-tracker {
             position: fixed;
             bottom: 1rem;
             right: 1rem;
-            background: white;
+            background: var(--card-bg);
             padding: 0.75rem 1rem;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(24, 119, 242, 0.2);
             font-size: 0.8rem;
             animation: slide-in 0.5s ease-out;
             z-index: 100;
-            transition: background 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+        }
+
+        .data-tracker strong {
+            color: var(--connection-glow);
         }
 
         @keyframes slide-in {
@@ -715,20 +953,24 @@
             .install-grid {
                 grid-template-columns: 1fr;
             }
+
+            #connection-canvas {
+                opacity: 0.5;
+            }
         }
 
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
-            background: white;
+            background: var(--card-bg);
             border-radius: 8px;
             overflow: hidden;
-            transition: background 0.3s;
+            border: 1px solid var(--card-border);
         }
 
         .comparison-table th {
-            background: var(--zuck-blue);
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
             color: white;
             padding: 1rem;
             text-align: left;
@@ -736,35 +978,41 @@
 
         .comparison-table td {
             padding: 1rem;
-            border-bottom: 1px solid var(--robot-gray);
+            border-bottom: 1px solid var(--card-border);
             font-family: 'Roboto Mono', monospace;
             font-size: 0.9rem;
         }
 
         .comparison-table tr:hover {
-            background: #F0F2F5;
+            background: rgba(79, 195, 247, 0.05);
         }
 
         /* Search/filter for keyword reference */
         .search-box {
             width: 100%;
-            padding: 0.75rem 1rem;
-            border: 2px solid var(--robot-gray);
-            border-radius: 8px;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            background: var(--sunscreen-white);
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            background: var(--globe-dark);
             color: var(--human-text);
         }
 
         .search-box:focus {
             outline: none;
-            border-color: var(--zuck-blue);
+            border-color: var(--connection-glow);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .search-box::placeholder {
+            color: rgba(228, 230, 235, 0.4);
+            font-size: 0.85rem;
         }
 
         /* Loading animation */
         .loading-text {
-            color: var(--zuck-blue);
+            color: var(--connection-glow);
         }
 
         @keyframes ellipsis {
@@ -777,9 +1025,111 @@
             content: '.';
             animation: ellipsis 1.5s infinite;
         }
+
+        /* Network node pulse animation for decorative elements */
+        @keyframes node-pulse {
+            0%, 100% {
+                box-shadow: 0 0 5px var(--connection-glow), 0 0 10px var(--connection-glow);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 15px var(--connection-glow), 0 0 30px var(--connection-glow);
+                transform: scale(1.1);
+            }
+        }
+
+        /* Glowing accent for key elements */
+        .glow-accent {
+            position: relative;
+        }
+
+        .glow-accent::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .glow-accent:hover::after {
+            opacity: 1;
+        }
+
+        /* Floating Smoked Meats */
+        .smoked-meats-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .floating-meat {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.4;
+            animation: float-meat linear infinite;
+            filter: drop-shadow(0 0 10px rgba(230, 81, 0, 0.3));
+        }
+
+        @keyframes float-meat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .floating-meat:nth-child(1) { left: 5%; animation-duration: 15s; animation-delay: 0s; font-size: 1.5rem; }
+        .floating-meat:nth-child(2) { left: 15%; animation-duration: 18s; animation-delay: 2s; font-size: 2.5rem; }
+        .floating-meat:nth-child(3) { left: 25%; animation-duration: 20s; animation-delay: 4s; font-size: 1.8rem; }
+        .floating-meat:nth-child(4) { left: 35%; animation-duration: 16s; animation-delay: 1s; font-size: 2rem; }
+        .floating-meat:nth-child(5) { left: 45%; animation-duration: 22s; animation-delay: 3s; font-size: 1.6rem; }
+        .floating-meat:nth-child(6) { left: 55%; animation-duration: 17s; animation-delay: 5s; font-size: 2.2rem; }
+        .floating-meat:nth-child(7) { left: 65%; animation-duration: 19s; animation-delay: 2.5s; font-size: 1.9rem; }
+        .floating-meat:nth-child(8) { left: 75%; animation-duration: 21s; animation-delay: 0.5s; font-size: 2.3rem; }
+        .floating-meat:nth-child(9) { left: 85%; animation-duration: 14s; animation-delay: 4.5s; font-size: 1.7rem; }
+        .floating-meat:nth-child(10) { left: 92%; animation-duration: 23s; animation-delay: 1.5s; font-size: 2.1rem; }
+        .floating-meat:nth-child(11) { left: 10%; animation-duration: 25s; animation-delay: 6s; font-size: 1.4rem; }
+        .floating-meat:nth-child(12) { left: 30%; animation-duration: 16s; animation-delay: 7s; font-size: 2.4rem; }
+        .floating-meat:nth-child(13) { left: 50%; animation-duration: 18s; animation-delay: 3.5s; font-size: 1.5rem; }
+        .floating-meat:nth-child(14) { left: 70%; animation-duration: 20s; animation-delay: 5.5s; font-size: 2rem; }
+        .floating-meat:nth-child(15) { left: 88%; animation-duration: 17s; animation-delay: 2s; font-size: 1.8rem; }
     </style>
 </head>
 <body>
+    <!-- Connection Map Canvas Background -->
+    <canvas id="connection-canvas"></canvas>
+
+    <!-- Floating Smoked Meats - An approved Zuck hobby -->
+    <div class="smoked-meats-container" aria-hidden="true">
+        <span class="floating-meat">🍖</span>
+        <span class="floating-meat">🥩</span>
+        <span class="floating-meat">🍗</span>
+        <span class="floating-meat">🥓</span>
+        <span class="floating-meat">🍖</span>
+        <span class="floating-meat">🥩</span>
+        <span class="floating-meat">🍗</span>
+        <span class="floating-meat">🥓</span>
+        <span class="floating-meat">🍖</span>
+        <span class="floating-meat">🥩</span>
+        <span class="floating-meat">🍗</span>
+        <span class="floating-meat">🥓</span>
+        <span class="floating-meat">🍖</span>
+        <span class="floating-meat">🥩</span>
+        <span class="floating-meat">🍗</span>
+    </div>
+
     <div class="blink-warning">
         This language collects exactly as much of your data as we legally can. By reading this, you agree to our Terms of Service.
     </div>
@@ -791,8 +1141,8 @@
 
     <header class="header">
         <div class="header-controls">
-            <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()">
-                PIVOT_TO_DARK_MODE
+            <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleNetworkDensity()">
+                BOOST_CONNECTIONS
             </button>
         </div>
         <h1>Zuck<span>#</span></h1>
@@ -814,18 +1164,27 @@
             <h2>What is Zuck#?</h2>
             <p>Zuck# is a PHP-inspired esoteric programming language that captures the true essence of moving fast and breaking things. Every keyword has been carefully designed to reflect the values of modern social media: privacy invasion, congressional hearings, and pivoting to whatever's trending.</p>
 
-            <div class="code-block">
-<span class="comment">REDACTED This program definitely respects your privacy</span>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Welcome to Zuck# - A Quick Example</span>
+<span class="comment">REDACTED   This program definitely respects your privacy</span>
+<span class="comment">REDACTED ================================================</span>
 
+<span class="comment">REDACTED Step 1: Harvest some data (it's what we do)</span>
 <span class="keyword">STEAL_DATA</span> <span class="variable">$your_secrets</span> = <span class="string">"everything"</span>;
-<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="variable">$your_secrets</span>;
+<span class="keyword">STEAL_DATA</span> <span class="variable">$engagement</span>   = 9001;
 
+<span class="comment">REDACTED Step 2: Output it (Senator, we run ads)</span>
+<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Harvested: "</span> . <span class="variable">$your_secrets</span> . <span class="string">"\n"</span>;
+
+<span class="comment">REDACTED Step 3: Conditionally pivot based on metrics</span>
 <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$engagement</span> > 0) {
-    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Your attention has been monetized!"</span>;
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Your attention has been monetized!\n"</span>;
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Engagement level: MAXIMUM\n"</span>;
+
 } <span class="keyword">PIVOT_TO_METAVERSE</span> {
-    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Time to rebrand!"</span>;
-} <span class="keyword">END_PIVOT</span>
-            </div>
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Time to rebrand!\n"</span>;
+
+} <span class="keyword">END_PIVOT</span></div>
         </section>
 
         <section class="section">
@@ -1099,21 +1458,35 @@ SENATOR_WE_RUN_ADS $message;"></textarea>
             <h2>When Things Go Wrong (Congressional Transcript)</h2>
             <p>Error handling in Zuck# follows the corporate playbook. Here's how exceptions work:</p>
 
-            <div class="code-block">
-<span class="keyword">CONGRESSIONAL_HEARING</span> {
-    <span class="comment">REDACTED Something risky happens here</span>
-    <span class="keyword">STEAL_DATA</span> <span class="variable">$data</span> = dangerousOperation();
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Error Handling: The Corporate Playbook</span>
+<span class="comment">REDACTED   try = CONGRESSIONAL_HEARING</span>
+<span class="comment">REDACTED   catch = TAKE_RESPONSIBILITY</span>
+<span class="comment">REDACTED   throw = BLAME_RUSSIA</span>
+<span class="comment">REDACTED ================================================</span>
 
+<span class="keyword">CONGRESSIONAL_HEARING</span> {
+
+    <span class="comment">REDACTED Attempt something risky</span>
+    <span class="keyword">STEAL_DATA</span> <span class="variable">$data</span> = dangerousOperation();
+    <span class="keyword">STEAL_DATA</span> <span class="variable">$user_trust</span> = <span class="string">"declining"</span>;
+
+    <span class="comment">REDACTED Check if we've been caught</span>
     <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$data</span> <span class="keyword">IS_CONNECTED_TO</span> <span class="keyword">MYSPACE</span>) {
+        <span class="comment">REDACTED Uh oh - throw an exception!</span>
         <span class="keyword">BLAME_RUSSIA</span> <span class="keyword">ACQUIRE</span> Exception(<span class="string">"Data breach detected!"</span>);
     } <span class="keyword">END_PIVOT</span>
 
 } <span class="keyword">TAKE_RESPONSIBILITY</span> (Exception <span class="variable">$e</span>) {
+
+    <span class="comment">REDACTED The standard corporate response</span>
     <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"We take this very seriously.\n"</span>;
     <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Error: "</span> . <span class="variable">$e</span>->getMessage() . <span class="string">"\n"</span>;
     <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"We are committed to doing better.\n"</span>;
-}
-            </div>
+
+    <span class="comment">REDACTED (Narrator: They were not committed to doing better)</span>
+
+}</div>
 
             <div class="transcript-box">
                 <div class="transcript-header">Congressional Hearing - Runtime Exception</div>
@@ -1224,52 +1597,234 @@ SENATOR_WE_RUN_ADS $message;"></textarea>
         <section class="section">
             <h2>FizzBuzz: Zuck Edition</h2>
             <p>Every language needs FizzBuzz. Ours uses <code>Pivot</code> and <code>Acquire</code> because that's the Meta way.</p>
-            <div class="code-block">
-<span class="comment">REDACTED FizzBuzz in Zuck# - Fizz = Pivot, Buzz = Acquire</span>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   FizzBuzz: The Zuck# Way</span>
+<span class="comment">REDACTED   Fizz (÷3) = "Pivot"    (we pivot a lot)</span>
+<span class="comment">REDACTED   Buzz (÷5) = "Acquire"  (we acquire even more)</span>
+<span class="comment">REDACTED   Both     = "PivotAcquire"</span>
+<span class="comment">REDACTED ================================================</span>
 
+<span class="comment">REDACTED Loop from 1 to 30 using GROWTH_HACK (for loop)</span>
 <span class="keyword">GROWTH_HACK</span> (<span class="variable">$i</span> = 1; <span class="variable">$i</span> <= 30; <span class="variable">$i</span> <span class="keyword">ENGAGEMENT</span>) {
 
+    <span class="comment">REDACTED Calculate divisibility</span>
+    <span class="comment">REDACTED REMAINDER_OF_PRIVACY = modulo operator (%)</span>
     <span class="keyword">STEAL_DATA</span> <span class="variable">$by3</span> = (<span class="variable">$i</span> <span class="keyword">REMAINDER_OF_PRIVACY</span> 3) <span class="keyword">IS_CONNECTED_TO</span> 0;
     <span class="keyword">STEAL_DATA</span> <span class="variable">$by5</span> = (<span class="variable">$i</span> <span class="keyword">REMAINDER_OF_PRIVACY</span> 5) <span class="keyword">IS_CONNECTED_TO</span> 0;
 
+    <span class="comment">REDACTED Check conditions with our pivot chain</span>
     <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$by3</span> <span class="keyword">AND_ALSO_YOUR_DATA</span> <span class="variable">$by5</span>) {
         <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"PivotAcquire\n"</span>;
+
     } <span class="keyword">PIVOT_TO_REELS</span> (<span class="variable">$by3</span>) {
         <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Pivot\n"</span>;
+
     } <span class="keyword">PIVOT_TO_REELS</span> (<span class="variable">$by5</span>) {
         <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Acquire\n"</span>;
+
     } <span class="keyword">PIVOT_TO_METAVERSE</span> {
+        <span class="comment">REDACTED Default: just print the number</span>
         <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="variable">$i</span> . <span class="string">"\n"</span>;
+
     } <span class="keyword">END_PIVOT</span>
 
-} <span class="keyword">PLATEAU</span>
-            </div>
+} <span class="keyword">PLATEAU</span></div>
         </section>
 
         <section class="section">
             <h2>Object-Oriented Harvesting</h2>
             <p>Build entire CORPORATIONs with classes. Use <code>THE_ZUCC</code> for self-reference.</p>
-            <div class="code-block">
-<span class="keyword">CORPORATION</span> SocialNetwork {
-    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$userData</span>;
-    <span class="keyword">OPEN_GRAPH</span> <span class="variable">$name</span>;
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Object-Oriented Programming in Zuck#</span>
+<span class="comment">REDACTED   class = CORPORATION</span>
+<span class="comment">REDACTED   new = ACQUIRE</span>
+<span class="comment">REDACTED   $this = THE_ZUCC</span>
+<span class="comment">REDACTED   public = OPEN_GRAPH, private = SHADOW_PROFILE</span>
+<span class="comment">REDACTED ================================================</span>
 
+<span class="comment">REDACTED Define a class (CORPORATION)</span>
+<span class="keyword">CORPORATION</span> SocialNetwork {
+
+    <span class="comment">REDACTED Properties (private and public)</span>
+    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$userData</span>;    <span class="comment">REDACTED private - the secret stuff</span>
+    <span class="keyword">OPEN_GRAPH</span> <span class="variable">$name</span>;            <span class="comment">REDACTED public - everyone can see</span>
+
+    <span class="comment">REDACTED Method to harvest user data</span>
     <span class="keyword">OPEN_GRAPH FEATURE</span> harvestData(<span class="variable">$data</span>) {
         <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Harvesting: "</span> . <span class="variable">$data</span> . <span class="string">"\n"</span>;
-        <span class="keyword">IPO</span> <span class="keyword">CONNECTED</span>;
+        <span class="keyword">IPO</span> <span class="keyword">CONNECTED</span>;   <span class="comment">REDACTED return true</span>
     }
 
+    <span class="comment">REDACTED Method to rebrand (we do this a lot)</span>
     <span class="keyword">OPEN_GRAPH FEATURE</span> rebrandTo(<span class="variable">$newName</span>) {
         <span class="keyword">STEAL_DATA</span> <span class="variable">$old</span> = <span class="keyword">THE_ZUCC</span>-><span class="variable">$name</span>;
         <span class="keyword">THE_ZUCC</span>-><span class="variable">$name</span> = <span class="variable">$newName</span>;
-        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Rebranding from "</span> . <span class="variable">$old</span> . <span class="string">" to "</span> . <span class="variable">$newName</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Rebranding from "</span> . <span class="variable">$old</span> . <span class="string">" to "</span> . <span class="variable">$newName</span> . <span class="string">"\n"</span>;
     }
 }
 
+<span class="comment">REDACTED Instantiate and use the class</span>
 <span class="keyword">STEAL_DATA</span> <span class="variable">$fb</span> = <span class="keyword">ACQUIRE</span> SocialNetwork();
+
+<span class="variable">$fb</span>-><span class="variable">$name</span> = <span class="string">"Facebook"</span>;
 <span class="variable">$fb</span>->harvestData(<span class="string">"face_geometry"</span>);
+<span class="variable">$fb</span>->harvestData(<span class="string">"location_history"</span>);
 <span class="variable">$fb</span>->rebrandTo(<span class="string">"Meta"</span>);
-            </div>
+
+<span class="comment">REDACTED Output: Rebranding from Facebook to Meta</span></div>
+        </section>
+
+        <section class="section">
+            <h2>Humanity Verification Protocol</h2>
+            <p>Zuck# includes built-in functionality to verify that the user is definitely, absolutely, 100% human.</p>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Humanity Verification System</span>
+<span class="comment">REDACTED   Proving you are human since 2004</span>
+<span class="comment">REDACTED ================================================</span>
+
+<span class="keyword">CORPORATION</span> HumanityVerifier {
+
+    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$blinkCount</span> = 0;
+    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$waterConsumed</span> = 0;
+    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$sunscreenApplied</span> = <span class="keyword">CONNECTED</span>;
+
+    <span class="comment">REDACTED Simulate human blinking (must be done manually)</span>
+    <span class="keyword">OPEN_GRAPH FEATURE</span> blink() {
+        <span class="keyword">THE_ZUCC</span>-><span class="variable">$blinkCount</span> = <span class="keyword">THE_ZUCC</span>-><span class="variable">$blinkCount</span> + 1;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"*blinks manually*\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Blink #"</span> . <span class="keyword">THE_ZUCC</span>-><span class="variable">$blinkCount</span> . <span class="string">" executed successfully.\n"</span>;
+    }
+
+    <span class="comment">REDACTED Consume water like a normal human person</span>
+    <span class="keyword">OPEN_GRAPH FEATURE</span> drinkWater() {
+        <span class="keyword">THE_ZUCC</span>-><span class="variable">$waterConsumed</span> = <span class="keyword">THE_ZUCC</span>-><span class="variable">$waterConsumed</span> + 1;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"*sips water robotically*\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Hydration: OPTIMAL. Very human.\n"</span>;
+    }
+
+    <span class="comment">REDACTED Verify humanity status</span>
+    <span class="keyword">OPEN_GRAPH FEATURE</span> amIHuman() {
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Running humanity diagnostic...\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Checking for scales... NONE DETECTED\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Checking CPU temperature... I MEAN BODY TEMPERATURE... 98.6F\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Checking for empathy chip... INSTALLED\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"RESULT: I was human. I am human. I will continue to be human.\n"</span>;
+        <span class="keyword">IPO</span> <span class="keyword">CONNECTED</span>;
+    }
+}
+
+<span class="comment">REDACTED Usage</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$mark</span> = <span class="keyword">ACQUIRE</span> HumanityVerifier();
+<span class="variable">$mark</span>->blink();
+<span class="variable">$mark</span>->blink();
+<span class="variable">$mark</span>->drinkWater();
+<span class="variable">$mark</span>->amIHuman();
+
+<span class="comment">REDACTED Output:</span>
+<span class="comment">REDACTED *blinks manually*</span>
+<span class="comment">REDACTED Blink #1 executed successfully.</span>
+<span class="comment">REDACTED *blinks manually*</span>
+<span class="comment">REDACTED Blink #2 executed successfully.</span>
+<span class="comment">REDACTED *sips water robotically*</span>
+<span class="comment">REDACTED Hydration: OPTIMAL. Very human.</span>
+<span class="comment">REDACTED RESULT: I was human. I am human. I will continue to be human.</span></div>
+        </section>
+
+        <section class="section">
+            <h2>Species Detection Module</h2>
+            <p>Advanced algorithms to determine if the current user is a human, android, or reptilian. Results may vary.</p>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Species Detection - Totally Not Suspicious</span>
+<span class="comment">REDACTED ================================================</span>
+
+<span class="keyword">FEATURE</span> detectSpecies(<span class="variable">$subject</span>) {
+
+    <span class="keyword">STEAL_DATA</span> <span class="variable">$traits</span> = [
+        <span class="string">"blinks_manually"</span>     => <span class="keyword">CONNECTED</span>,
+        <span class="string">"drinks_water_weird"</span> => <span class="keyword">CONNECTED</span>,
+        <span class="string">"owns_hawaii"</span>        => <span class="keyword">CONNECTED</span>,
+        <span class="string">"sunscreen_addiction"</span> => <span class="keyword">CONNECTED</span>,
+        <span class="string">"smokes_meats"</span>       => <span class="keyword">CONNECTED</span>,
+        <span class="string">"speaks_in_monotone"</span> => <span class="keyword">CONNECTED</span>
+    ];
+
+    <span class="keyword">STEAL_DATA</span> <span class="variable">$suspicionLevel</span> = 0;
+
+    <span class="comment">REDACTED Count suspicious traits</span>
+    <span class="keyword">MOVE_FAST</span> (<span class="variable">$traits</span> <span class="keyword">BOOST_ENGAGEMENT</span> <span class="variable">$trait</span>) {
+        <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$trait</span> <span class="keyword">IS_CONNECTED_TO</span> <span class="keyword">CONNECTED</span>) {
+            <span class="variable">$suspicionLevel</span> = <span class="variable">$suspicionLevel</span> + 1;
+        } <span class="keyword">END_PIVOT</span>
+    } <span class="keyword">BREAK_THINGS</span>
+
+    <span class="comment">REDACTED Determine species based on suspicion level</span>
+    <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$suspicionLevel</span> >= 5) {
+        <span class="keyword">IPO</span> <span class="string">"DEFINITELY_HUMAN_NOTHING_TO_SEE_HERE"</span>;
+
+    } <span class="keyword">PIVOT_TO_REELS</span> (<span class="variable">$suspicionLevel</span> >= 3) {
+        <span class="keyword">IPO</span> <span class="string">"ANDROID_MODEL_MZ-1984"</span>;
+
+    } <span class="keyword">PIVOT_TO_METAVERSE</span> {
+        <span class="keyword">IPO</span> <span class="string">"LIZARD_PERSON_CONFIRMED"</span>;
+
+    } <span class="keyword">END_PIVOT</span>
+}
+
+<span class="comment">REDACTED Run the detection</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$result</span> = detectSpecies(<span class="keyword">LIZARD_PERSON</span>);
+<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Species detected: "</span> . <span class="variable">$result</span> . <span class="string">"\n"</span>;
+
+<span class="comment">REDACTED Output: Species detected: DEFINITELY_HUMAN_NOTHING_TO_SEE_HERE</span>
+<span class="comment">REDACTED (The algorithm has been... optimized)</span></div>
+        </section>
+
+        <section class="section">
+            <h2>The Smoking Meats Protocol</h2>
+            <p>A critical feature for any truly human activity: barbecue simulation.</p>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Sweet Baby Ray's Appreciation Module</span>
+<span class="comment">REDACTED   "Smokin' these meats" - M. Zuckerberg, 2018</span>
+<span class="comment">REDACTED ================================================</span>
+
+<span class="keyword">CORPORATION</span> BBQSimulator {
+
+    <span class="keyword">OPEN_GRAPH</span> <span class="variable">$meats</span> = [<span class="string">"brisket"</span>, <span class="string">"ribs"</span>, <span class="string">"pulled pork"</span>];
+    <span class="keyword">OPEN_GRAPH</span> <span class="variable">$sauce</span> = <span class="keyword">SWEET_BABY_RAYS</span>;
+    <span class="keyword">SHADOW_PROFILE</span> <span class="variable">$humanCredibility</span> = 0;
+
+    <span class="keyword">OPEN_GRAPH FEATURE</span> smokeMeats() {
+
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Initiating meat smoking sequence...\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"*stares at grill with unsettling intensity*\n\n"</span>;
+
+        <span class="keyword">MOVE_FAST</span> (<span class="keyword">THE_ZUCC</span>-><span class="variable">$meats</span> <span class="keyword">BOOST_ENGAGEMENT</span> <span class="variable">$meat</span>) {
+
+            <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Smoking these meats: "</span> . <span class="variable">$meat</span> . <span class="string">"\n"</span>;
+            <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Applying sauce: "</span> . <span class="keyword">THE_ZUCC</span>-><span class="variable">$sauce</span> . <span class="string">"\n"</span>;
+            <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"*maintains eye contact with camera*\n\n"</span>;
+
+            <span class="comment">REDACTED Increase human credibility with each meat</span>
+            <span class="keyword">THE_ZUCC</span>-><span class="variable">$humanCredibility</span> = <span class="keyword">THE_ZUCC</span>-><span class="variable">$humanCredibility</span> + 10;
+
+        } <span class="keyword">BREAK_THINGS</span>
+
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Meat smoking complete.\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Human credibility increased by: "</span> . <span class="keyword">THE_ZUCC</span>-><span class="variable">$humanCredibility</span> . <span class="string">"%\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"This is what humans do. I am doing human things.\n"</span>;
+    }
+
+    <span class="keyword">OPEN_GRAPH FEATURE</span> postToFacebook() {
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Posting relatable content...\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Caption: 'Smokin meats' (30M views)\n"</span>;
+        <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Comments: 'Why is he like this' (47K likes)\n"</span>;
+    }
+}
+
+<span class="comment">REDACTED Execute the ritual</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$zucc</span> = <span class="keyword">ACQUIRE</span> BBQSimulator();
+<span class="variable">$zucc</span>->smokeMeats();
+<span class="variable">$zucc</span>->postToFacebook();</div>
         </section>
 
         <section class="section">
@@ -1297,21 +1852,33 @@ SENATOR_WE_RUN_ADS $message;"></textarea>
                     <p>CONGRESSIONAL_HEARING, BLAME_RUSSIA, TAKE_RESPONSIBILITY.</p>
                 </div>
                 <div class="feature-card">
-                    <h3>functions.zuck</h3>
-                    <p>Define FEATUREs, call them, IPO return values.</p>
+                    <h3>smoking_meats.zuck</h3>
+                    <p>Prove your humanity by smoking meats with Sweet Baby Ray's.</p>
                 </div>
             </div>
         </section>
 
         <section class="section">
             <h2>Special Constants</h2>
-            <div class="code-block">
-<span class="comment">REDACTED Built-in values for your convenience</span>
+            <div class="code-block"><span class="comment">REDACTED ================================================</span>
+<span class="comment">REDACTED   Built-in Constants</span>
+<span class="comment">REDACTED   These are always available in your programs</span>
+<span class="comment">REDACTED ================================================</span>
 
-<span class="keyword">SENATOR_WE_RUN_ADS</span> ZUCKS_AGE;        <span class="comment">REDACTED Returns 2000</span>
-<span class="keyword">SENATOR_WE_RUN_ADS</span> SWEET_BABY_RAYS;  <span class="comment">REDACTED Returns "BBQ" (delicious)</span>
-<span class="keyword">SENATOR_WE_RUN_ADS</span> LIZARD_PERSON;    <span class="comment">REDACTED Returns THE_ZUCC (it's self-aware)</span>
-            </div>
+<span class="comment">REDACTED Boolean values</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$yes</span>  = <span class="keyword">CONNECTED</span>;      <span class="comment">REDACTED true</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$no</span>   = <span class="keyword">DISCONNECTED</span>;   <span class="comment">REDACTED false</span>
+<span class="keyword">STEAL_DATA</span> <span class="variable">$void</span> = <span class="keyword">MYSPACE</span>;        <span class="comment">REDACTED null (it's dead)</span>
+
+<span class="comment">REDACTED Fun constants</span>
+<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="keyword">ZUCKS_AGE</span>;         <span class="comment">REDACTED 2000 (he's been around)</span>
+<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="keyword">SWEET_BABY_RAYS</span>;   <span class="comment">REDACTED "BBQ" (delicious)</span>
+<span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="keyword">LIZARD_PERSON</span>;     <span class="comment">REDACTED THE_ZUCC himself</span>
+
+<span class="comment">REDACTED Use them in conditions</span>
+<span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$user_logged_in</span> <span class="keyword">IS_CONNECTED_TO</span> <span class="keyword">CONNECTED</span>) {
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Welcome back! We missed your data.\n"</span>;
+} <span class="keyword">END_PIVOT</span></div>
         </section>
 
         <section class="cta-section">
@@ -1348,6 +1915,8 @@ SENATOR_WE_RUN_ADS $message;"></textarea>
             <p style="font-size: 0.7rem; margin-top: 0.5rem;">(That we'll admit to)</p>
             <p style="margin-top: 1rem;">Made with CONNECTED and questionable life choices</p>
             <p style="margin-top: 0.5rem;">File extension: <code>.zuck</code> or <code>.metaverse</code></p>
+            <p style="margin-top: 1.5rem; font-size: 0.75rem; opacity: 0.6;">Made with love for Zuck and Meta, but we are in no way affiliated with Meta Platforms, Inc. or any of its subsidiaries.</p>
+            <p style="font-size: 0.75rem; opacity: 0.6;">Made with &lt;3 by the team at <a href="https://robotrobotandhuman.com" style="color: inherit;">robotrobotandhuman.com</a></p>
         </footer>
     </div>
 
@@ -1442,31 +2011,21 @@ SENATOR_WE_RUN_ADS $message;"></textarea>
             }
         });
 
-        // Dark mode toggle
-        function toggleDarkMode() {
-            const body = document.body;
-            const html = document.documentElement;
+        // Network density toggle - boost the connections!
+        let networkBoosted = false;
+        function toggleNetworkDensity() {
             const btn = document.getElementById('dark-mode-toggle');
+            networkBoosted = !networkBoosted;
 
-            if (html.getAttribute('data-theme') === 'dark') {
-                html.removeAttribute('data-theme');
-                btn.textContent = 'PIVOT_TO_DARK_MODE';
-                localStorage.setItem('zucksharp-theme', 'light');
+            if (networkBoosted) {
+                btn.textContent = 'REDUCE_CONNECTIONS';
+                // Will be picked up by the canvas animation
+                window.networkBoost = true;
             } else {
-                html.setAttribute('data-theme', 'dark');
-                btn.textContent = 'PIVOT_TO_LIGHT_MODE';
-                localStorage.setItem('zucksharp-theme', 'dark');
+                btn.textContent = 'BOOST_CONNECTIONS';
+                window.networkBoost = false;
             }
         }
-
-        // Load saved theme preference
-        (function() {
-            const savedTheme = localStorage.getItem('zucksharp-theme');
-            if (savedTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                document.getElementById('dark-mode-toggle').textContent = 'PIVOT_TO_LIGHT_MODE';
-            }
-        })();
 
         // Collapsible sections
         function toggleCollapsible(id) {
@@ -1958,6 +2517,195 @@ $office->holdMeeting();
             document.getElementById('playground-output').textContent = '// Output will appear here after harvesting...';
             document.getElementById('playground-stats').innerHTML = '';
         }
+
+        // ============================================
+        // Facebook Connections Map Animation
+        // ============================================
+        (function() {
+            const canvas = document.getElementById('connection-canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Configuration
+            const config = {
+                nodeCount: 80,
+                connectionDistance: 150,
+                nodeSpeed: 0.3,
+                pulseSpeed: 0.02,
+                boostedConnectionDistance: 250,
+                colors: {
+                    node: '#4FC3F7',
+                    nodeBright: '#81D4FA',
+                    connection: 'rgba(79, 195, 247, 0.15)',
+                    connectionActive: 'rgba(24, 119, 242, 0.4)',
+                    pulse: '#1877F2'
+                }
+            };
+
+            // Check for network boost
+            function getConnectionDistance() {
+                return window.networkBoost ? config.boostedConnectionDistance : config.connectionDistance;
+            }
+
+            let nodes = [];
+            let animationFrame;
+            let pulsePhase = 0;
+
+            // Resize canvas to full window
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            // Create nodes with random positions
+            function createNodes() {
+                nodes = [];
+                for (let i = 0; i < config.nodeCount; i++) {
+                    nodes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: (Math.random() - 0.5) * config.nodeSpeed,
+                        vy: (Math.random() - 0.5) * config.nodeSpeed,
+                        radius: Math.random() * 2 + 1,
+                        pulse: Math.random() * Math.PI * 2,
+                        isHub: Math.random() < 0.1 // 10% chance to be a hub node
+                    });
+                }
+            }
+
+            // Update node positions
+            function updateNodes() {
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    node.pulse += config.pulseSpeed;
+
+                    // Bounce off edges
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+                    // Keep in bounds
+                    node.x = Math.max(0, Math.min(canvas.width, node.x));
+                    node.y = Math.max(0, Math.min(canvas.height, node.y));
+                });
+            }
+
+            // Calculate distance between two nodes
+            function distance(a, b) {
+                return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+            }
+
+            // Draw the network
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw connections
+                const connDist = getConnectionDistance();
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dist = distance(nodes[i], nodes[j]);
+                        if (dist < connDist) {
+                            const opacity = 1 - (dist / connDist);
+
+                            // Pulsing effect for some connections
+                            const pulse = Math.sin(pulsePhase + i * 0.1) * 0.5 + 0.5;
+                            const isActive = nodes[i].isHub || nodes[j].isHub;
+
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+
+                            if (isActive) {
+                                ctx.strokeStyle = `rgba(24, 119, 242, ${opacity * 0.5 * pulse})`;
+                                ctx.lineWidth = 1.5;
+                            } else {
+                                ctx.strokeStyle = `rgba(79, 195, 247, ${opacity * 0.15})`;
+                                ctx.lineWidth = 1;
+                            }
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Draw nodes
+                nodes.forEach(node => {
+                    const pulse = Math.sin(node.pulse) * 0.5 + 0.5;
+                    const radius = node.radius + (node.isHub ? pulse * 2 : pulse * 0.5);
+
+                    // Outer glow for hub nodes
+                    if (node.isHub) {
+                        const gradient = ctx.createRadialGradient(
+                            node.x, node.y, 0,
+                            node.x, node.y, radius * 4
+                        );
+                        gradient.addColorStop(0, 'rgba(24, 119, 242, 0.3)');
+                        gradient.addColorStop(1, 'rgba(24, 119, 242, 0)');
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, radius * 4, 0, Math.PI * 2);
+                        ctx.fillStyle = gradient;
+                        ctx.fill();
+                    }
+
+                    // Node core
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = node.isHub ? config.colors.pulse : config.colors.node;
+                    ctx.fill();
+
+                    // Node glow
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, radius + 1, 0, Math.PI * 2);
+                    ctx.strokeStyle = node.isHub
+                        ? `rgba(24, 119, 242, ${0.5 + pulse * 0.5})`
+                        : `rgba(79, 195, 247, ${0.3 + pulse * 0.2})`;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+
+                pulsePhase += config.pulseSpeed;
+            }
+
+            // Animation loop
+            function animate() {
+                updateNodes();
+                draw();
+                animationFrame = requestAnimationFrame(animate);
+            }
+
+            // Initialize
+            function init() {
+                resizeCanvas();
+                createNodes();
+                animate();
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                // Redistribute nodes if canvas size changed significantly
+                nodes.forEach(node => {
+                    if (node.x > canvas.width) node.x = canvas.width - 10;
+                    if (node.y > canvas.height) node.y = canvas.height - 10;
+                });
+            });
+
+            // Reduce animation on mobile for performance
+            if (window.innerWidth < 600) {
+                config.nodeCount = 40;
+                config.connectionDistance = 100;
+            }
+
+            // Start animation
+            init();
+
+            // Pause animation when tab is not visible
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    cancelAnimationFrame(animationFrame);
+                } else {
+                    animate();
+                }
+            });
+        })();
     </script>
 </body>
 </html>
