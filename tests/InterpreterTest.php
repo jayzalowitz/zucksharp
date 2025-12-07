@@ -22,9 +22,9 @@ class InterpreterTest extends TestCase
     }
 
     /**
-     * Run source code and return output
+     * Execute source code and return output
      */
-    private function run(string $source): string
+    private function execute(string $source): string
     {
         return $this->zuck->run($source);
     }
@@ -34,7 +34,7 @@ class InterpreterTest extends TestCase
      */
     public function testSenatorWeRunAdsOutputsText(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS "Hello, World!"; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS "Hello, World!"; ?>');
         $this->assertEquals('Hello, World!', $output);
     }
 
@@ -43,7 +43,7 @@ class InterpreterTest extends TestCase
      */
     public function testPokeOutputsWithNewline(): void
     {
-        $output = $this->run('<?zuck POKE "Hello"; ?>');
+        $output = $this->execute('<?zuck POKE "Hello"; ?>');
         $this->assertEquals("Hello\n", $output);
     }
 
@@ -52,7 +52,7 @@ class InterpreterTest extends TestCase
      */
     public function testStealDataAndRetrieve(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $msg = "Harvested!";
             SENATOR_WE_RUN_ADS $msg;
         ?>');
@@ -64,7 +64,7 @@ class InterpreterTest extends TestCase
      */
     public function testConnectedIsTrue(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $human = CONNECTED;
             SENATOR_WE_RUN_ADS $human;
         ?>');
@@ -76,7 +76,7 @@ class InterpreterTest extends TestCase
      */
     public function testDisconnectedIsFalse(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $human = DISCONNECTED;
             SENATOR_WE_RUN_ADS $human;
         ?>');
@@ -88,7 +88,7 @@ class InterpreterTest extends TestCase
      */
     public function testMyspaceIsNull(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $empathy = MYSPACE;
             SENATOR_WE_RUN_ADS $empathy;
         ?>');
@@ -100,7 +100,7 @@ class InterpreterTest extends TestCase
      */
     public function testArithmeticOperations(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS 2 + 3 * 4; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS 2 + 3 * 4; ?>');
         $this->assertEquals('14', $output);
     }
 
@@ -109,7 +109,7 @@ class InterpreterTest extends TestCase
      */
     public function testStringConcatenation(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $name = "Mark";
             SENATOR_WE_RUN_ADS "Hello, " . $name . "!";
         ?>');
@@ -121,7 +121,7 @@ class InterpreterTest extends TestCase
      */
     public function testRemainderOfPrivacy(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS 10 REMAINDER_OF_PRIVACY 3; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS 10 REMAINDER_OF_PRIVACY 3; ?>');
         $this->assertEquals('1', $output);
     }
 
@@ -130,7 +130,7 @@ class InterpreterTest extends TestCase
      */
     public function testIsConnectedTo(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $result = 5 IS_CONNECTED_TO 5;
             SENATOR_WE_RUN_ADS $result;
         ?>');
@@ -142,7 +142,7 @@ class InterpreterTest extends TestCase
      */
     public function testUnfriended(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $result = 5 UNFRIENDED 3;
             SENATOR_WE_RUN_ADS $result;
         ?>');
@@ -154,7 +154,7 @@ class InterpreterTest extends TestCase
      */
     public function testPivotToVideoTrueBranch(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             PIVOT_TO_VIDEO (CONNECTED) {
                 SENATOR_WE_RUN_ADS "In the if!";
             } END_PIVOT
@@ -167,7 +167,7 @@ class InterpreterTest extends TestCase
      */
     public function testPivotToMetaverseElseBranch(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             PIVOT_TO_VIDEO (DISCONNECTED) {
                 SENATOR_WE_RUN_ADS "if";
             } PIVOT_TO_METAVERSE {
@@ -182,7 +182,7 @@ class InterpreterTest extends TestCase
      */
     public function testPivotToReelsElseIfBranch(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $x = 50;
             PIVOT_TO_VIDEO ($x > 100) {
                 SENATOR_WE_RUN_ADS "A";
@@ -200,7 +200,7 @@ class InterpreterTest extends TestCase
      */
     public function testMoveFastWhileLoop(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $i = 0;
             MOVE_FAST ($i < 3) {
                 SENATOR_WE_RUN_ADS $i;
@@ -215,7 +215,7 @@ class InterpreterTest extends TestCase
      */
     public function testGrowthHackForLoop(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             GROWTH_HACK ($i = 1; $i <= 3; $i ENGAGEMENT) {
                 SENATOR_WE_RUN_ADS $i;
             } PLATEAU
@@ -228,7 +228,7 @@ class InterpreterTest extends TestCase
      */
     public function testHarvestUsersForeachLoop(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $users = SOCIAL_GRAPH["A", "B", "C"];
             HARVEST_USERS ($users AS $user) {
                 SENATOR_WE_RUN_ADS $user;
@@ -242,7 +242,7 @@ class InterpreterTest extends TestCase
      */
     public function testEngagementIncrement(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $users = 0;
             $users ENGAGEMENT;
             $users ENGAGEMENT;
@@ -256,7 +256,7 @@ class InterpreterTest extends TestCase
      */
     public function testChurnDecrement(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $users = 5;
             $users CHURN;
             SENATOR_WE_RUN_ADS $users;
@@ -269,7 +269,7 @@ class InterpreterTest extends TestCase
      */
     public function testFeatureAndFunctionCall(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             FEATURE greet($name) {
                 IPO "Hello, " . $name . "!";
             }
@@ -283,7 +283,7 @@ class InterpreterTest extends TestCase
      */
     public function testFunctionWithReturnValue(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             FEATURE add($a, $b) {
                 IPO $a + $b;
             }
@@ -298,7 +298,7 @@ class InterpreterTest extends TestCase
      */
     public function testCorporationAndAcquire(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             CORPORATION Greeter {
                 OPEN_GRAPH FEATURE sayHi() {
                     SENATOR_WE_RUN_ADS "Hi from Corporation!";
@@ -315,7 +315,7 @@ class InterpreterTest extends TestCase
      */
     public function testClassWithConstructor(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             CORPORATION Network {
                 OPEN_GRAPH FEATURE __construct($name) {
                     SENATOR_WE_RUN_ADS "Created: " . $name;
@@ -331,7 +331,7 @@ class InterpreterTest extends TestCase
      */
     public function testCongressionalHearingTryCatch(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             CONGRESSIONAL_HEARING {
                 BLAME_RUSSIA ACQUIRE Exception("Data breach!");
             } TAKE_RESPONSIBILITY (Exception $e) {
@@ -346,7 +346,7 @@ class InterpreterTest extends TestCase
      */
     public function testTryBlockCompletesWithoutException(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             CONGRESSIONAL_HEARING {
                 SENATOR_WE_RUN_ADS "No problem!";
             } TAKE_RESPONSIBILITY (Exception $e) {
@@ -361,7 +361,7 @@ class InterpreterTest extends TestCase
      */
     public function testSocialGraphArrayAccess(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $arr = SOCIAL_GRAPH["a", "b", "c"];
             SENATOR_WE_RUN_ADS $arr[1];
         ?>');
@@ -373,7 +373,7 @@ class InterpreterTest extends TestCase
      */
     public function testAssociativeArrayAccess(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $user = SOCIAL_GRAPH["name" => "Mark", "role" => "CEO"];
             SENATOR_WE_RUN_ADS $user["name"];
         ?>');
@@ -385,7 +385,7 @@ class InterpreterTest extends TestCase
      */
     public function testZucksAgeMagicConstant(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS ZUCKS_AGE; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS ZUCKS_AGE; ?>');
         $this->assertEquals('2000', $output);
     }
 
@@ -394,7 +394,7 @@ class InterpreterTest extends TestCase
      */
     public function testSweetBabyRaysMagicConstant(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS SWEET_BABY_RAYS; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS SWEET_BABY_RAYS; ?>');
         $this->assertEquals('BBQ', $output);
     }
 
@@ -403,7 +403,7 @@ class InterpreterTest extends TestCase
      */
     public function testCountUsersBuiltin(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $arr = SOCIAL_GRAPH[1, 2, 3, 4, 5];
             SENATOR_WE_RUN_ADS COUNT_USERS($arr);
         ?>');
@@ -415,7 +415,7 @@ class InterpreterTest extends TestCase
      */
     public function testMonetizeBuiltin(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $num = 42;
             STEAL_DATA $str = MONETIZE($num);
             SENATOR_WE_RUN_ADS $str . " is a string";
@@ -428,7 +428,7 @@ class InterpreterTest extends TestCase
      */
     public function testFactCheckThisBuiltin(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             SENATOR_WE_RUN_ADS FACT_CHECK_THIS(1);
             SENATOR_WE_RUN_ADS FACT_CHECK_THIS(0);
         ?>');
@@ -440,7 +440,7 @@ class InterpreterTest extends TestCase
      */
     public function testAndAlsoYourData(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $result = CONNECTED AND_ALSO_YOUR_DATA CONNECTED;
             SENATOR_WE_RUN_ADS $result;
         ?>');
@@ -452,7 +452,7 @@ class InterpreterTest extends TestCase
      */
     public function testOrYourFriendsData(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $result = DISCONNECTED OR_YOUR_FRIENDS_DATA CONNECTED;
             SENATOR_WE_RUN_ADS $result;
         ?>');
@@ -464,7 +464,7 @@ class InterpreterTest extends TestCase
      */
     public function testFakeNewsLogicalNot(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             STEAL_DATA $result = FAKE_NEWS DISCONNECTED;
             SENATOR_WE_RUN_ADS $result;
         ?>');
@@ -476,7 +476,7 @@ class InterpreterTest extends TestCase
      */
     public function testRageQuitBreak(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             GROWTH_HACK ($i = 0; $i < 10; $i ENGAGEMENT) {
                 PIVOT_TO_VIDEO ($i IS_CONNECTED_TO 3) {
                     RAGE_QUIT;
@@ -492,7 +492,7 @@ class InterpreterTest extends TestCase
      */
     public function testScrollPastContinue(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             GROWTH_HACK ($i = 0; $i < 5; $i ENGAGEMENT) {
                 PIVOT_TO_VIDEO ($i IS_CONNECTED_TO 2) {
                     SCROLL_PAST;
@@ -508,7 +508,7 @@ class InterpreterTest extends TestCase
      */
     public function testNestedLoops(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             GROWTH_HACK ($i = 0; $i < 2; $i ENGAGEMENT) {
                 GROWTH_HACK ($j = 0; $j < 2; $j ENGAGEMENT) {
                     SENATOR_WE_RUN_ADS $i . $j;
@@ -523,7 +523,7 @@ class InterpreterTest extends TestCase
      */
     public function testRecursiveFunction(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             FEATURE factorial($n) {
                 PIVOT_TO_VIDEO ($n <= 1) {
                     IPO 1;
@@ -540,7 +540,7 @@ class InterpreterTest extends TestCase
      */
     public function testErrorMessageFormat(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS $undefined; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS $undefined; ?>');
         $this->assertStringContainsString('ZUCK# ERROR', $output);
     }
 
@@ -549,7 +549,7 @@ class InterpreterTest extends TestCase
      */
     public function testDivisionByZeroReturnsZero(): void
     {
-        $output = $this->run('<?zuck SENATOR_WE_RUN_ADS 10 / 0; ?>');
+        $output = $this->execute('<?zuck SENATOR_WE_RUN_ADS 10 / 0; ?>');
         $this->assertEquals('0', $output);
     }
 
@@ -558,7 +558,7 @@ class InterpreterTest extends TestCase
      */
     public function testComparisonOperators(): void
     {
-        $output = $this->run('<?zuck
+        $output = $this->execute('<?zuck
             SENATOR_WE_RUN_ADS 5 > 3;
             SENATOR_WE_RUN_ADS 5 < 3;
             SENATOR_WE_RUN_ADS 5 >= 5;

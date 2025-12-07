@@ -43,7 +43,7 @@
         "test": "phpunit",
         "lint": "php-cs-fixer fix --dry-run --diff",
         "lint:fix": "php-cs-fixer fix",
-        "analyze": "phpstan analyse src -l 5"
+        "analyze": "phpstan analyse"
     },
     "config": {
         "sort-packages": true
