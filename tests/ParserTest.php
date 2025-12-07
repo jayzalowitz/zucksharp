@@ -5,26 +5,25 @@ declare(strict_types=1);
 namespace ZuckSharp\Tests;
 
 use PHPUnit\Framework\TestCase;
-use ZuckSharp\Lexer;
-use ZuckSharp\Parser;
-use ZuckSharp\Program;
-use ZuckSharp\EchoStatement;
-use ZuckSharp\PrintStatement;
-use ZuckSharp\AssignmentStatement;
-use ZuckSharp\IfStatement;
-use ZuckSharp\WhileStatement;
-use ZuckSharp\ForStatement;
-use ZuckSharp\ForeachStatement;
-use ZuckSharp\FunctionDeclaration;
-use ZuckSharp\FunctionCall;
-use ZuckSharp\ReturnStatement;
-use ZuckSharp\ClassDeclaration;
-use ZuckSharp\TryCatchStatement;
-use ZuckSharp\LiteralExpression;
-use ZuckSharp\BinaryExpression;
-use ZuckSharp\VariableExpression;
 use ZuckSharp\ArrayExpression;
+use ZuckSharp\AssignmentStatement;
+use ZuckSharp\BinaryExpression;
+use ZuckSharp\ClassDeclaration;
+use ZuckSharp\EchoStatement;
+use ZuckSharp\ForeachStatement;
+use ZuckSharp\ForStatement;
+use ZuckSharp\FunctionCall;
+use ZuckSharp\FunctionDeclaration;
+use ZuckSharp\IfStatement;
+use ZuckSharp\Lexer;
+use ZuckSharp\LiteralExpression;
 use ZuckSharp\NewExpression;
+use ZuckSharp\Parser;
+use ZuckSharp\PrintStatement;
+use ZuckSharp\Program;
+use ZuckSharp\ReturnStatement;
+use ZuckSharp\TryCatchStatement;
+use ZuckSharp\WhileStatement;
 
 require_once __DIR__ . '/../src/Lexer.php';
 require_once __DIR__ . '/../src/Parser.php';
@@ -42,6 +41,7 @@ class ParserTest extends TestCase
         $lexer = new Lexer($source);
         $tokens = $lexer->tokenize();
         $parser = new Parser($tokens);
+
         return $parser->parse();
     }
 

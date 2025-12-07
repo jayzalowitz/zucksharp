@@ -299,7 +299,7 @@ class LexerTest extends TestCase
      */
     private function assertTokenTypes(array $expected, array $tokens): void
     {
-        $actual = array_map(fn(Token $t) => $t->type, $tokens);
+        $actual = array_map(fn (Token $t) => $t->type, $tokens);
         $this->assertEquals($expected, $actual);
     }
 }

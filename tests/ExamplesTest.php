@@ -225,7 +225,7 @@ class ExamplesTest extends TestCase
             $this->assertStringNotContainsString(
                 'ZUCK# ERROR',
                 $output,
-                "Example " . basename($file) . " should run without errors"
+                'Example ' . basename($file) . ' should run without errors'
             );
         }
     }
