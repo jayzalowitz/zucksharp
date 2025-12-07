@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+.github
+
+# Development tools
+.php-cs-fixer.php
+.php-cs-fixer.cache
+phpstan.neon
+phpunit.xml
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# Tests (not needed in production)
+tests/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+vendor/
