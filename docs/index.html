@@ -923,6 +923,13 @@ chmod +x bin/zuck
                         <option value="conditional">Conditionals</option>
                         <option value="loop">Loops</option>
                         <option value="fizzbuzz">FizzBuzz</option>
+                        <option value="congressional">Congressional Testimony</option>
+                        <option value="dating">Dating App Algorithm</option>
+                        <option value="privacy">Privacy Policy Generator</option>
+                        <option value="rebrand">Corporate Rebrand</option>
+                        <option value="apology">Public Apology Bot</option>
+                        <option value="startup">Startup Pitch</option>
+                        <option value="metaverse">Metaverse Meeting</option>
                     </select>
                 </div>
                 <textarea class="playground-editor" id="playground-code" placeholder="STEAL_DATA $message = &quot;Hello, Senator!&quot;;
@@ -1553,6 +1560,222 @@ GROWTH_HACK ($i = 1; $i <= 15; $i ENGAGEMENT) {
     } END_PIVOT
 } PLATEAU
 
+?>`,
+            congressional: `<?zuck
+
+REDACTED Simulate a congressional hearing
+
+SENATOR_WE_RUN_ADS "=== CONGRESSIONAL HEARING SIMULATOR ===\\n\\n";
+
+STEAL_DATA $questions = SOCIAL_GRAPH[
+    "Does Facebook sell user data?",
+    "How does Facebook make money?",
+    "Is Facebook a monopoly?",
+    "What is the Metaverse?",
+    "Are you a human?"
+];
+
+HARVEST_USERS ($questions AS $question) {
+    SENATOR_WE_RUN_ADS "SENATOR: " . $question . "\\n";
+    SENATOR_WE_RUN_ADS "THE_ZUCC: Senator, we run ads.\\n";
+    SENATOR_WE_RUN_ADS "*blinks manually*\\n\\n";
+} USERS_HARVESTED
+
+SENATOR_WE_RUN_ADS "HEARING ADJOURNED. Nothing was resolved.\\n";
+
+?>`,
+            dating: `<?zuck
+
+REDACTED The Algorithm decides your love life
+
+CORPORATION DatingAlgorithm {
+    SHADOW_PROFILE $userData;
+    OPEN_GRAPH $matches;
+
+    OPEN_GRAPH FEATURE findLove($user) {
+        SENATOR_WE_RUN_ADS "Analyzing " . $user . "'s deepest insecurities...\\n";
+        SENATOR_WE_RUN_ADS "Cross-referencing with advertisers...\\n";
+        SENATOR_WE_RUN_ADS "Maximizing engagement over happiness...\\n";
+
+        STEAL_DATA $compatibility = RANDOM_AD();
+
+        PIVOT_TO_VIDEO ($compatibility > 50) {
+            IPO "Show them someone slightly out of their league";
+        } PIVOT_TO_METAVERSE {
+            IPO "Show them an ad for therapy apps";
+        } END_PIVOT
+    }
+}
+
+STEAL_DATA $tinder = ACQUIRE DatingAlgorithm();
+SENATOR_WE_RUN_ADS $tinder->findLove("lonely_user_42069");
+
+?>`,
+            privacy: `<?zuck
+
+REDACTED Privacy Policy Generator 3000
+
+FEATURE generatePrivacyPolicy() {
+    STEAL_DATA $sections = SOCIAL_GRAPH[
+        "We respect your privacy (LOL)",
+        "We collect: everything",
+        "We share with: also everyone",
+        "Your rights: you have the right to remain confused",
+        "Data retention: forever, obviously",
+        "Cookies: we use ALL the cookies",
+        "Third parties: they're not even third parties, they're first parties now",
+        "Updates: we can change this whenever, you won't read it anyway"
+    ];
+
+    SENATOR_WE_RUN_ADS "=== PRIVACY POLICY ===\\n";
+    SENATOR_WE_RUN_ADS "(Last updated: just now. Check again.)\\n\\n";
+
+    STEAL_DATA $i = 1;
+    HARVEST_USERS ($sections AS $section) {
+        SENATOR_WE_RUN_ADS $i . ". " . $section . "\\n";
+        $i ENGAGEMENT;
+    } USERS_HARVESTED
+
+    SENATOR_WE_RUN_ADS "\\nBy existing, you agree to these terms.\\n";
+}
+
+generatePrivacyPolicy();
+
+?>`,
+            rebrand: `<?zuck
+
+REDACTED Corporate Rebrand Simulator
+
+CORPORATION TechCompany {
+    OPEN_GRAPH $name;
+    OPEN_GRAPH $scandal_count;
+
+    OPEN_GRAPH FEATURE checkIfRebrandNeeded() {
+        PIVOT_TO_VIDEO (THE_ZUCC->$scandal_count > 3) {
+            SENATOR_WE_RUN_ADS "Time to rebrand!\\n";
+            IPO CONNECTED;
+        } PIVOT_TO_METAVERSE {
+            SENATOR_WE_RUN_ADS "We can survive one more scandal.\\n";
+            IPO DISCONNECTED;
+        } END_PIVOT
+    }
+
+    OPEN_GRAPH FEATURE rebrand() {
+        STEAL_DATA $oldName = THE_ZUCC->$name;
+        STEAL_DATA $newNames = SOCIAL_GRAPH["Meta", "X", "Alphabet", "Nothing", "Definitely Not Evil Inc"];
+        STEAL_DATA $newName = $newNames[RANDOM_AD() REMAINDER_OF_PRIVACY 5];
+
+        THE_ZUCC->$name = $newName;
+        SENATOR_WE_RUN_ADS $oldName . " is now " . $newName . "!\\n";
+        SENATOR_WE_RUN_ADS "Problem solved. No more bad press.\\n";
+        SENATOR_WE_RUN_ADS "*narrator: There was more bad press*\\n";
+    }
+}
+
+STEAL_DATA $fb = ACQUIRE TechCompany();
+$fb->$name = "Facebook";
+$fb->$scandal_count = 47;
+$fb->checkIfRebrandNeeded();
+$fb->rebrand();
+
+?>`,
+            apology: `<?zuck
+
+REDACTED Corporate Apology Generator
+
+FEATURE generateApology($incident) {
+    STEAL_DATA $templates = SOCIAL_GRAPH[
+        "We take this very seriously.",
+        "This is not who we are.",
+        "We are committed to doing better.",
+        "We hear you.",
+        "We're looking into this.",
+        "Our AI made a mistake (blame the AI).",
+        "We've updated our community guidelines.",
+        "This was an isolated incident (it wasn't)."
+    ];
+
+    SENATOR_WE_RUN_ADS "=== OFFICIAL STATEMENT ===\\n\\n";
+    SENATOR_WE_RUN_ADS "Regarding: " . $incident . "\\n\\n";
+
+    HARVEST_USERS ($templates AS $line) {
+        SENATOR_WE_RUN_ADS $line . "\\n";
+    } USERS_HARVESTED
+
+    SENATOR_WE_RUN_ADS "\\nSincerely,\\n";
+    SENATOR_WE_RUN_ADS "Some VP you've never heard of\\n";
+    SENATOR_WE_RUN_ADS "(The CEO is surfing in Hawaii)\\n";
+}
+
+generateApology("the latest data breach");
+generateApology("that algorithm thing");
+generateApology("everything, honestly");
+
+?>`,
+            startup: `<?zuck
+
+REDACTED Startup Pitch Generator
+
+FEATURE pitchToVCs() {
+    STEAL_DATA $buzzwords = SOCIAL_GRAPH[
+        "AI-powered", "blockchain-enabled", "Web3",
+        "metaverse-native", "disrupting", "democratizing",
+        "leveraging synergies", "paradigm-shifting"
+    ];
+
+    STEAL_DATA $problems = SOCIAL_GRAPH[
+        "people having too much privacy",
+        "not enough ads in dreams",
+        "humans making their own decisions",
+        "children not being monetized enough"
+    ];
+
+    SENATOR_WE_RUN_ADS "=== PITCH DECK SLIDE 1 ===\\n\\n";
+    SENATOR_WE_RUN_ADS "We're " . $buzzwords[0] . " " . $buzzwords[3] . "!\\n";
+    SENATOR_WE_RUN_ADS "Solving the problem of " . $problems[0] . "\\n\\n";
+
+    SENATOR_WE_RUN_ADS "TAM: $47 trillion (we made this up)\\n";
+    SENATOR_WE_RUN_ADS "Users: 3 (founders + mom)\\n";
+    SENATOR_WE_RUN_ADS "Revenue: $0 (but we have VISION)\\n";
+    SENATOR_WE_RUN_ADS "Burn rate: yes\\n\\n";
+
+    SENATOR_WE_RUN_ADS "We're raising $500M at a $10B valuation.\\n";
+    SENATOR_WE_RUN_ADS "Because we're DISRUPTING.\\n";
+}
+
+pitchToVCs();
+
+?>`,
+            metaverse: `<?zuck
+
+REDACTED A day in the Metaverse office
+
+CORPORATION MetaverseOffice {
+    SHADOW_PROFILE $employees;
+    OPEN_GRAPH $meetings;
+
+    OPEN_GRAPH FEATURE holdMeeting() {
+        SENATOR_WE_RUN_ADS "=== METAVERSE ALL-HANDS ===\\n\\n";
+        SENATOR_WE_RUN_ADS "Attendees: 3 real humans, 47 bots, 1 CEO's avatar\\n";
+        SENATOR_WE_RUN_ADS "Legs: still not rendering\\n\\n";
+
+        SENATOR_WE_RUN_ADS "*Mark's avatar floats ominously*\\n\\n";
+
+        SENATOR_WE_RUN_ADS "MARK: Welcome to the future of work!\\n";
+        SENATOR_WE_RUN_ADS "EMPLOYEE_1: My VR headset is giving me a migraine.\\n";
+        SENATOR_WE_RUN_ADS "MARK: That's the feeling of innovation!\\n";
+        SENATOR_WE_RUN_ADS "EMPLOYEE_2: Can we just use Zoom?\\n";
+        SENATOR_WE_RUN_ADS "MARK: *avatar freezes for 30 seconds*\\n";
+        SENATOR_WE_RUN_ADS "MARK: Senator, we run ads.\\n\\n";
+
+        SENATOR_WE_RUN_ADS "*Meeting crashes*\\n";
+        SENATOR_WE_RUN_ADS "*Everyone goes back to Slack*\\n";
+    }
+}
+
+STEAL_DATA $office = ACQUIRE MetaverseOffice();
+$office->holdMeeting();
+
 ?>`
         };
 
@@ -1617,6 +1840,103 @@ GROWTH_HACK ($i = 1; $i <= 15; $i ENGAGEMENT) {
                             fakeOutput += `User ${i} harvested\n`;
                         }
                         fakeOutput += 'Done harvesting!\n';
+                    }
+                    // Congressional Hearing
+                    if (code.includes('CONGRESSIONAL HEARING SIMULATOR')) {
+                        fakeOutput = '=== CONGRESSIONAL HEARING SIMULATOR ===\n\n';
+                        const questions = [
+                            "Does Facebook sell user data?",
+                            "How does Facebook make money?",
+                            "Is Facebook a monopoly?",
+                            "What is the Metaverse?",
+                            "Are you a human?"
+                        ];
+                        questions.forEach(q => {
+                            fakeOutput += `SENATOR: ${q}\n`;
+                            fakeOutput += 'THE_ZUCC: Senator, we run ads.\n';
+                            fakeOutput += '*blinks manually*\n\n';
+                        });
+                        fakeOutput += 'HEARING ADJOURNED. Nothing was resolved.\n';
+                    }
+                    // Dating App
+                    if (code.includes('DatingAlgorithm')) {
+                        fakeOutput = 'Analyzing lonely_user_42069\'s deepest insecurities...\n';
+                        fakeOutput += 'Cross-referencing with advertisers...\n';
+                        fakeOutput += 'Maximizing engagement over happiness...\n\n';
+                        fakeOutput += Math.random() > 0.5
+                            ? 'Result: Show them someone slightly out of their league\n'
+                            : 'Result: Show them an ad for therapy apps\n';
+                        fakeOutput += '\n[User swiped right 47 times. Matched with 0. Engagement: MAXIMUM]\n';
+                    }
+                    // Privacy Policy
+                    if (code.includes('Privacy Policy Generator') || code.includes('generatePrivacyPolicy')) {
+                        fakeOutput = '=== PRIVACY POLICY ===\n';
+                        fakeOutput += '(Last updated: just now. Check again.)\n\n';
+                        fakeOutput += '1. We respect your privacy (LOL)\n';
+                        fakeOutput += '2. We collect: everything\n';
+                        fakeOutput += '3. We share with: also everyone\n';
+                        fakeOutput += '4. Your rights: you have the right to remain confused\n';
+                        fakeOutput += '5. Data retention: forever, obviously\n';
+                        fakeOutput += '6. Cookies: we use ALL the cookies\n';
+                        fakeOutput += '7. Third parties: they\'re not even third parties now\n';
+                        fakeOutput += '8. Updates: we can change this whenever\n\n';
+                        fakeOutput += 'By existing, you agree to these terms.\n';
+                    }
+                    // Rebrand
+                    if (code.includes('Corporate Rebrand') || code.includes('checkIfRebrandNeeded')) {
+                        const names = ['Meta', 'X', 'Alphabet', 'Nothing', 'Definitely Not Evil Inc'];
+                        const newName = names[Math.floor(Math.random() * names.length)];
+                        fakeOutput = 'Checking scandal count... 47 scandals found.\n';
+                        fakeOutput += 'Time to rebrand!\n\n';
+                        fakeOutput += `Facebook is now ${newName}!\n`;
+                        fakeOutput += 'Problem solved. No more bad press.\n';
+                        fakeOutput += '*narrator: There was more bad press*\n';
+                    }
+                    // Apology
+                    if (code.includes('Corporate Apology') || code.includes('generateApology')) {
+                        fakeOutput = '=== OFFICIAL STATEMENT ===\n\n';
+                        fakeOutput += 'Regarding: the latest data breach\n\n';
+                        fakeOutput += 'We take this very seriously.\n';
+                        fakeOutput += 'This is not who we are.\n';
+                        fakeOutput += 'We are committed to doing better.\n';
+                        fakeOutput += 'We hear you.\n';
+                        fakeOutput += 'We\'re looking into this.\n';
+                        fakeOutput += 'Our AI made a mistake (blame the AI).\n';
+                        fakeOutput += 'We\'ve updated our community guidelines.\n';
+                        fakeOutput += 'This was an isolated incident (it wasn\'t).\n\n';
+                        fakeOutput += 'Sincerely,\n';
+                        fakeOutput += 'Some VP you\'ve never heard of\n';
+                        fakeOutput += '(The CEO is surfing in Hawaii)\n';
+                    }
+                    // Startup Pitch
+                    if (code.includes('Startup Pitch') || code.includes('pitchToVCs')) {
+                        fakeOutput = '=== PITCH DECK SLIDE 1 ===\n\n';
+                        fakeOutput += 'We\'re AI-powered metaverse-native!\n';
+                        fakeOutput += 'Solving the problem of people having too much privacy\n\n';
+                        fakeOutput += 'TAM: $47 trillion (we made this up)\n';
+                        fakeOutput += 'Users: 3 (founders + mom)\n';
+                        fakeOutput += 'Revenue: $0 (but we have VISION)\n';
+                        fakeOutput += 'Burn rate: yes\n\n';
+                        fakeOutput += 'We\'re raising $500M at a $10B valuation.\n';
+                        fakeOutput += 'Because we\'re DISRUPTING.\n\n';
+                        fakeOutput += '[VC has left the call]\n';
+                        fakeOutput += '[VC has invested anyway]\n';
+                    }
+                    // Metaverse Meeting
+                    if (code.includes('MetaverseOffice') || code.includes('METAVERSE ALL-HANDS')) {
+                        fakeOutput = '=== METAVERSE ALL-HANDS ===\n\n';
+                        fakeOutput += 'Attendees: 3 real humans, 47 bots, 1 CEO\'s avatar\n';
+                        fakeOutput += 'Legs: still not rendering\n\n';
+                        fakeOutput += '*Mark\'s avatar floats ominously*\n\n';
+                        fakeOutput += 'MARK: Welcome to the future of work!\n';
+                        fakeOutput += 'EMPLOYEE_1: My VR headset is giving me a migraine.\n';
+                        fakeOutput += 'MARK: That\'s the feeling of innovation!\n';
+                        fakeOutput += 'EMPLOYEE_2: Can we just use Zoom?\n';
+                        fakeOutput += 'MARK: *avatar freezes for 30 seconds*\n';
+                        fakeOutput += 'MARK: Senator, we run ads.\n\n';
+                        fakeOutput += '*Meeting crashes*\n';
+                        fakeOutput += '*Everyone goes back to Slack*\n';
+                        fakeOutput += '*$10B well spent*\n';
                     }
 
                     if (!fakeOutput) {
