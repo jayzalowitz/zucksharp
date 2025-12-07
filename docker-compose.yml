@@ -1,0 +1,75 @@
+# Zuck# Docker Compose Configuration
+# "Done is better than perfect" - so here's a compose file
+
+version: '3.8'
+
+services:
+  # Run Zuck# programs
+  zuck:
+    build:
+      context: .
+      target: production
+    image: zucksharp:latest
+    container_name: zucksharp
+    volumes:
+      - ./examples:/app/examples:ro
+      - ./programs:/app/programs:ro
+    working_dir: /app
+
+  # Development environment with all dev dependencies
+  dev:
+    build:
+      context: .
+      target: dev
+    image: zucksharp:dev
+    container_name: zucksharp-dev
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+    working_dir: /app
+    entrypoint: /app/bin/zuck
+
+  # Run tests
+  test:
+    build:
+      context: .
+      target: dev
+    image: zucksharp:dev
+    container_name: zucksharp-test
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+    working_dir: /app
+    entrypoint: composer
+    command: test
+
+  # Run code linting
+  lint:
+    build:
+      context: .
+      target: dev
+    image: zucksharp:dev
+    container_name: zucksharp-lint
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+    working_dir: /app
+    entrypoint: composer
+    command: lint
+
+  # Run static analysis
+  analyze:
+    build:
+      context: .
+      target: dev
+    image: zucksharp:dev
+    container_name: zucksharp-analyze
+    volumes:
+      - .:/app
+      - vendor:/app/vendor
+    working_dir: /app
+    entrypoint: composer
+    command: analyze
+
+volumes:
+  vendor:

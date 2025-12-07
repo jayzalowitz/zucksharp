@@ -1245,7 +1245,7 @@
                     <div class="install-icon">docker</div>
                     <h4>Docker</h4>
                     <p>Containerized harvesting</p>
-                    <span class="status soon">SOON</span>
+                    <span class="status available">AVAILABLE</span>
                 </div>
             </div>
 
@@ -1265,6 +1265,26 @@ chmod +x bin/zuck
 
 <span class="comment"># Debug mode for maximum data harvesting visibility</span>
 ./bin/zuck --debug examples/fizzbuzz.zuck
+            </div>
+
+            <h3 style="margin-top: 2rem; color: var(--connection-glow);">Docker Installation</h3>
+            <p>Prefer containers? We've got you covered. Your data stays isolated... sort of.</p>
+
+            <div class="code-block" style="background: #0D1117;">
+<span class="comment"># Build the image</span>
+docker build -t zucksharp .
+
+<span class="comment"># Run a Zuck# program</span>
+docker run --rm zucksharp examples/hello.zuck
+
+<span class="comment"># Interactive REPL mode</span>
+docker run --rm -it zucksharp
+
+<span class="comment"># Using docker-compose</span>
+docker-compose run zuck examples/hello.zuck
+
+<span class="comment"># Run tests in container</span>
+docker-compose run test
             </div>
         </section>
 

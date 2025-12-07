@@ -39,6 +39,22 @@ composer install
 ./bin/zuck --help
 ```
 
+### Via Docker
+
+```bash
+# Build the image
+docker build -t zucksharp .
+
+# Run a Zuck# program
+docker run --rm -v $(pwd)/examples:/app/examples zucksharp examples/hello.zuck
+
+# Interactive REPL
+docker run --rm -it zucksharp
+
+# Using docker-compose
+docker-compose run zuck examples/hello.zuck
+```
+
 ### Global Installation
 
 ```bash
@@ -263,6 +279,9 @@ See the `examples/` directory:
 composer test
 # or
 ./vendor/bin/phpunit
+
+# Via Docker
+docker-compose run test
 ```
 
 ### Code Quality
@@ -276,6 +295,23 @@ composer lint:fix
 
 # Static analysis
 composer analyze
+
+# Via Docker
+docker-compose run lint
+docker-compose run analyze
+```
+
+### Docker Development
+
+```bash
+# Build development image
+docker-compose build dev
+
+# Run dev container with live code mounting
+docker-compose run dev examples/hello.zuck
+
+# Run all quality checks
+docker-compose run test && docker-compose run lint && docker-compose run analyze
 ```
 
 ### CI/CD
