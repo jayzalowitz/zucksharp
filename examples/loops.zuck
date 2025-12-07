@@ -1,0 +1,29 @@
+<?zuck
+
+REDACTED Loop examples - MOVE_FAST until you BREAK_THINGS!
+
+SENATOR_WE_RUN_ADS "=== Growing User Base ===\n";
+
+STEAL_DATA $users = 0;
+STEAL_DATA $target = 5;
+
+MOVE_FAST ($users < $target) {
+    $users ENGAGEMENT;
+    SENATOR_WE_RUN_ADS "Users: " . $users . " billion\n";
+} BREAK_THINGS
+
+SENATOR_WE_RUN_ADS "\n=== Congressional Hearings Survived ===\n";
+
+GROWTH_HACK ($i = 1; $i <= 5; $i ENGAGEMENT) {
+    SENATOR_WE_RUN_ADS "Hearing #" . $i . ": Senator, we run ads.\n";
+} PLATEAU
+
+SENATOR_WE_RUN_ADS "\n=== Pivoting Through Strategies ===\n";
+
+STEAL_DATA $pivots = SOCIAL_GRAPH["Video", "Stories", "Reels", "Metaverse", "AI"];
+
+HARVEST_USERS ($pivots AS $pivot) {
+    SENATOR_WE_RUN_ADS "Pivoting to: " . $pivot . "\n";
+} USERS_HARVESTED
+
+?>
