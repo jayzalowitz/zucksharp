@@ -543,7 +543,7 @@ class Interpreter
         return $array[$index] ?? null;
     }
 
-    private function evaluateNew(NewExpression $node): ZuckObject
+    private function evaluateNew(NewExpression $node): ZuckObject|\Exception
     {
         if (!isset($this->classes[$node->className])) {
             // Check for built-in Exception

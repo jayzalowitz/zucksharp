@@ -405,6 +405,11 @@ class Parser
             $this->expect('RBRACE');
         }
 
+        // Optional END_PIVOT keyword after if statement
+        if ($this->check('ENDIF')) {
+            $this->advance();
+        }
+
         return new IfStatement($condition, $thenBranch, $elseIfBranches, $elseBranch);
     }
 
@@ -469,6 +474,11 @@ class Parser
         }
         $this->expect('RBRACE');
 
+        // Optional PLATEAU keyword after for loop
+        if ($this->check('ENDFOR')) {
+            $this->advance();
+        }
+
         return new ForStatement($init, $condition, $increment, $body);
     }
 
@@ -496,6 +506,11 @@ class Parser
             $body[] = $this->parseStatement();
         }
         $this->expect('RBRACE');
+
+        // Optional USERS_HARVESTED keyword after foreach loop
+        if ($this->check('ENDFOREACH')) {
+            $this->advance();
+        }
 
         return new ForeachStatement($iterable, $keyVar, $valueVar, $body);
     }

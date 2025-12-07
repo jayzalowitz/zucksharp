@@ -1,0 +1,35 @@
+{
+    "name": "zucksharp/zucksharp",
+    "description": "Move Fast and Break Things - A PHP-inspired esoteric programming language",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "The Zucc",
+            "email": "senator@we-run-ads.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZuckSharp\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/zuck"
+    ],
+    "keywords": [
+        "esoteric",
+        "programming-language",
+        "php",
+        "zuckerberg",
+        "meta",
+        "facebook",
+        "satire"
+    ],
+    "scripts": {
+        "test": "php bin/zuck examples/hello.zuck"
+    }
+}

@@ -1,0 +1,53 @@
+<?zuck
+
+REDACTED Function examples - FEATURE your way to success, then IPO!
+
+FEATURE greetSenator($name) {
+    IPO "Hello, Senator " . $name . ". We run ads.\n";
+}
+
+FEATURE calculateUserValue($users, $dataPoints) {
+    STEAL_DATA $value = $users SCALE $dataPoints SCALE 0.001;
+    IPO $value;
+}
+
+FEATURE apologize($incident) {
+    SENATOR_WE_RUN_ADS "We take " . $incident . " very seriously.\n";
+    SENATOR_WE_RUN_ADS "We are committed to doing better.\n";
+    SENATOR_WE_RUN_ADS "Your trust is important to us.\n";
+    IPO "Apology delivered successfully";
+}
+
+FEATURE pivot($from, $to) {
+    SENATOR_WE_RUN_ADS "Pivoting from " . $from . " to " . $to . "...\n";
+    SENATOR_WE_RUN_ADS "Laying off 10,000 employees...\n";
+    SENATOR_WE_RUN_ADS "Rebranding complete!\n";
+    IPO CONNECTED;
+}
+
+REDACTED Let's call our features!
+
+SENATOR_WE_RUN_ADS "=== Senate Hearing Simulation ===\n\n";
+
+SENATOR_WE_RUN_ADS greetSenator("Warren");
+SENATOR_WE_RUN_ADS greetSenator("Cruz");
+SENATOR_WE_RUN_ADS greetSenator("Graham");
+
+SENATOR_WE_RUN_ADS "\n=== User Value Calculation ===\n\n";
+
+STEAL_DATA $userValue = calculateUserValue(3000000000, 5000);
+SENATOR_WE_RUN_ADS "Total user value: $" . $userValue . " billion\n";
+
+SENATOR_WE_RUN_ADS "\n=== PR Response ===\n\n";
+
+STEAL_DATA $apologyResult = apologize("Cambridge Analytica");
+SENATOR_WE_RUN_ADS "Status: " . $apologyResult . "\n";
+
+SENATOR_WE_RUN_ADS "\n=== Strategic Pivot ===\n\n";
+
+STEAL_DATA $pivotSuccess = pivot("Social Media", "Metaverse");
+PIVOT_TO_VIDEO ($pivotSuccess IS_CONNECTED_TO CONNECTED) {
+    SENATOR_WE_RUN_ADS "Pivot successful! Stock price: uncertain.\n";
+} END_PIVOT
+
+?>
