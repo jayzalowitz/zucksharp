@@ -1,0 +1,18 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - tests
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Allow mixed types in the interpreter for dynamic language features
+        - '#Cannot access offset .* on mixed#'
+        - '#Cannot call method .* on mixed#'
+        - '#Parameter .* of function .* expects .*, mixed given#'
+        - '#Method .* should return .* but returns mixed#'
+        # Baseline existing source code issues
+        - '#Method ZuckSharp\\Lexer::nextToken\(\) never returns null#'
+        - '#Property ZuckSharp\\Parser::\$length is never read, only written#'
+        - '#Negated boolean expression is always false#'
+        - '#Match expression does not handle remaining value: string#'
