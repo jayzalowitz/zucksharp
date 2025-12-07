@@ -1,0 +1,13 @@
+parameters:
+    level: 5
+    paths:
+        - src
+    excludePaths:
+        - tests
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Allow mixed types in the interpreter for dynamic language features
+        - '#Cannot access offset .* on mixed#'
+        - '#Cannot call method .* on mixed#'
+        - '#Parameter .* of function .* expects .*, mixed given#'
+        - '#Method .* should return .* but returns mixed#'
