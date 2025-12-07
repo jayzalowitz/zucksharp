@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zuck# - The Programming Language That Harvests Your Attention</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Zuck# is a PHP-inspired esoteric programming language that pays tribute to Mark Zuckerberg. Move fast. Break things. Harvest data.">
+    <meta name="keywords" content="zucksharp, esoteric programming language, php, satire, mark zuckerberg, meta, facebook">
+    <meta name="author" content="The Zucc (definitely human)">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jayzalowitz.github.io/zucksharp/">
+    <meta property="og:title" content="Zuck# - The Programming Language That Harvests Your Attention">
+    <meta property="og:description" content="A PHP-inspired esoteric programming language. STEAL_DATA, SENATOR_WE_RUN_ADS, PIVOT_TO_METAVERSE. Move fast and break things.">
+    <meta property="og:image" content="https://jayzalowitz.github.io/zucksharp/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jayzalowitz.github.io/zucksharp/">
+    <meta property="twitter:title" content="Zuck# - The Programming Language That Harvests Your Attention">
+    <meta property="twitter:description" content="A PHP-inspired esoteric programming language. STEAL_DATA, SENATOR_WE_RUN_ADS, PIVOT_TO_METAVERSE. Move fast and break things.">
+    <meta property="twitter:image" content="https://jayzalowitz.github.io/zucksharp/preview.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Z#</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -16,6 +39,52 @@
             --sunscreen-white: #FFFFFF;
             --bbq-sauce: #8B4513;
             --congressional-red: #CC0000;
+            --code-bg: #1E1E1E;
+            --code-text: #D4D4D4;
+        }
+
+        /* Dark mode variables */
+        [data-theme="dark"] {
+            --zuck-blue: #4A9EFF;
+            --meta-blue: #3B82F6;
+            --robot-gray: #2D2D2D;
+            --human-text: #E4E6EB;
+            --sunscreen-white: #1A1A1A;
+            --code-bg: #0D1117;
+            --code-text: #E6EDF3;
+        }
+
+        [data-theme="dark"] body {
+            background: linear-gradient(180deg, #1A1A1A 0%, #2D2D2D 100%);
+        }
+
+        [data-theme="dark"] .feature-card,
+        [data-theme="dark"] .testimonial,
+        [data-theme="dark"] .roadmap-item,
+        [data-theme="dark"] .hero-quote,
+        [data-theme="dark"] .comparison-table,
+        [data-theme="dark"] .data-tracker,
+        [data-theme="dark"] .install-card,
+        [data-theme="dark"] .transcript-box,
+        [data-theme="dark"] .playground-container {
+            background: #2D2D2D;
+            color: var(--human-text);
+        }
+
+        [data-theme="dark"] .comparison-table td {
+            border-bottom-color: #404040;
+        }
+
+        [data-theme="dark"] .comparison-table tr:hover {
+            background: #363636;
+        }
+
+        [data-theme="dark"] .collapsible-header {
+            background: #363636;
+        }
+
+        [data-theme="dark"] .collapsible-content {
+            background: #2D2D2D;
         }
 
         * {
@@ -30,6 +99,7 @@
             min-height: 100vh;
             color: var(--human-text);
             line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .header {
@@ -42,12 +112,13 @@
         }
 
         .header::before {
-            content: "👁️";
+            content: "Z#";
             position: absolute;
             font-size: 200px;
             opacity: 0.05;
             top: -50px;
             right: -50px;
+            font-weight: 800;
         }
 
         .header h1 {
@@ -58,6 +129,30 @@
 
         .header h1 span {
             color: #7DD3FC;
+        }
+
+        .header-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dark-mode-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255,255,255,0.3);
         }
 
         .tagline {
@@ -80,6 +175,20 @@
             50% { opacity: 0.7; }
         }
 
+        /* Zuck Facts Banner */
+        .facts-banner {
+            background: var(--bbq-sauce);
+            color: white;
+            padding: 0.75rem;
+            text-align: center;
+            font-size: 0.9rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .facts-banner .fact-icon {
+            margin-right: 0.5rem;
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
@@ -95,6 +204,7 @@
             font-style: italic;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             position: relative;
+            transition: background 0.3s ease;
         }
 
         .hero-quote::after {
@@ -118,7 +228,7 @@
             padding: 1.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
         }
 
         .feature-card:hover {
@@ -135,8 +245,8 @@
         }
 
         .code-block {
-            background: #1E1E1E;
-            color: #D4D4D4;
+            background: var(--code-bg);
+            color: var(--code-text);
             padding: 1.5rem;
             border-radius: 8px;
             font-family: 'Roboto Mono', monospace;
@@ -175,6 +285,257 @@
             gap: 0.5rem;
         }
 
+        /* Installation Cards */
+        .install-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .install-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .install-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .install-card .install-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .install-card h4 {
+            color: var(--zuck-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .install-card .status {
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .install-card .status.available {
+            background: #22C55E;
+            color: white;
+        }
+
+        .install-card .status.soon {
+            background: #F59E0B;
+            color: white;
+        }
+
+        .php-requirement {
+            background: linear-gradient(135deg, var(--zuck-blue), var(--meta-blue));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .php-requirement .php-icon {
+            font-size: 2rem;
+        }
+
+        /* Playground */
+        .playground-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 1rem 0;
+            transition: background 0.3s;
+        }
+
+        .playground-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .playground-header select {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--robot-gray);
+            font-family: inherit;
+            background: var(--sunscreen-white);
+            color: var(--human-text);
+        }
+
+        .playground-editor {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            border: 2px solid var(--robot-gray);
+            border-radius: 8px;
+            resize: vertical;
+            background: var(--code-bg);
+            color: var(--code-text);
+        }
+
+        .playground-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .playground-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .playground-btn.run {
+            background: var(--zuck-blue);
+            color: white;
+        }
+
+        .playground-btn.run:hover {
+            background: var(--meta-blue);
+            transform: scale(1.02);
+        }
+
+        .playground-btn.clear {
+            background: var(--robot-gray);
+            color: var(--human-text);
+        }
+
+        .playground-output {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--code-bg);
+            border-radius: 8px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+            color: #22C55E;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+
+        .playground-stats {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--bbq-sauce);
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Collapsible sections */
+        .collapsible {
+            margin: 1rem 0;
+        }
+
+        .collapsible-header {
+            background: #F0F2F5;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .collapsible-header:hover {
+            background: #E4E6EB;
+        }
+
+        .collapsible-header .arrow {
+            transition: transform 0.3s;
+        }
+
+        .collapsible.open .collapsible-header .arrow {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: white;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .collapsible.open .collapsible-content {
+            max-height: 2000px;
+        }
+
+        .collapsible-content table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .collapsible-content td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--robot-gray);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .collapsible-content tr:hover {
+            background: #F9FAFB;
+        }
+
+        /* Congressional Transcript */
+        .transcript-box {
+            background: white;
+            border: 2px solid var(--congressional-red);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Roboto Mono', monospace;
+            transition: background 0.3s;
+        }
+
+        .transcript-header {
+            text-align: center;
+            border-bottom: 1px solid var(--robot-gray);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--congressional-red);
+        }
+
+        .transcript-line {
+            margin: 0.75rem 0;
+            padding-left: 1rem;
+        }
+
+        .transcript-speaker {
+            font-weight: 700;
+            color: var(--zuck-blue);
+        }
+
+        .transcript-error {
+            color: var(--congressional-red);
+            background: rgba(204, 0, 0, 0.1);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
         .roadmap-item {
             background: white;
             padding: 1rem 1.5rem;
@@ -184,6 +545,7 @@
             display: flex;
             align-items: center;
             gap: 1rem;
+            transition: background 0.3s;
         }
 
         .roadmap-item.done {
@@ -238,6 +600,32 @@
             transform: scale(1.05);
         }
 
+        /* Community Section */
+        .community-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .community-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--zuck-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .community-link:hover {
+            background: var(--meta-blue);
+            transform: translateY(-2px);
+        }
+
         .footer {
             text-align: center;
             padding: 2rem;
@@ -257,6 +645,11 @@
             border-radius: 12px;
             margin: 1rem 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .testimonial:hover {
+            transform: scale(1.01);
         }
 
         .testimonial-author {
@@ -278,11 +671,50 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             font-size: 0.8rem;
             animation: slide-in 0.5s ease-out;
+            z-index: 100;
+            transition: background 0.3s;
         }
 
         @keyframes slide-in {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Mobile responsive fixes */
+        @media (max-width: 600px) {
+            .data-tracker {
+                bottom: auto;
+                top: auto;
+                right: 0;
+                left: 0;
+                border-radius: 0;
+                position: relative;
+                margin: 1rem 0;
+                animation: none;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-controls {
+                position: static;
+                justify-content: center;
+                margin-top: 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .playground-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .install-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .comparison-table {
@@ -292,6 +724,7 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
+            transition: background 0.3s;
         }
 
         .comparison-table th {
@@ -311,6 +744,39 @@
         .comparison-table tr:hover {
             background: #F0F2F5;
         }
+
+        /* Search/filter for keyword reference */
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--robot-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            background: var(--sunscreen-white);
+            color: var(--human-text);
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--zuck-blue);
+        }
+
+        /* Loading animation */
+        .loading-text {
+            color: var(--zuck-blue);
+        }
+
+        @keyframes ellipsis {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+        }
+
+        .loading-text::after {
+            content: '.';
+            animation: ellipsis 1.5s infinite;
+        }
     </style>
 </head>
 <body>
@@ -318,15 +784,30 @@
         This language collects exactly as much of your data as we legally can. By reading this, you agree to our Terms of Service.
     </div>
 
+    <div class="facts-banner" id="facts-banner">
+        <span class="fact-icon">Z#</span>
+        <span id="zuck-fact">Did you know? MYSPACE returns null because it's basically dead.</span>
+    </div>
+
     <header class="header">
+        <div class="header-controls">
+            <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()">
+                PIVOT_TO_DARK_MODE
+            </button>
+        </div>
         <h1>Zuck<span>#</span></h1>
         <p class="tagline">"A programming language for connecting the world. And harvesting it."</p>
     </header>
 
     <div class="container">
+        <!-- Mobile data tracker placement -->
+        <div class="data-tracker mobile-tracker" id="tracker-mobile" style="display: none;">
+            We're tracking: <strong>your mouse movements</strong>
+        </div>
+
         <div class="hero-quote">
             "Senator, we run ads. Also, we run this programming language now."
-            <span class="zuck-face">🤖</span>
+            <span class="zuck-face">Z#</span>
         </div>
 
         <section class="section">
@@ -378,58 +859,274 @@
         </section>
 
         <section class="section">
-            <h2>Keyword Translations</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Boring PHP</th>
-                        <th>Exciting Zuck#</th>
-                        <th>Why?</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>echo</td>
-                        <td>SENATOR_WE_RUN_ADS</td>
-                        <td>The answer to everything</td>
-                    </tr>
-                    <tr>
-                        <td>$var =</td>
-                        <td>STEAL_DATA</td>
-                        <td>Honesty is the best policy</td>
-                    </tr>
-                    <tr>
-                        <td>if/else</td>
-                        <td>PIVOT_TO_VIDEO/METAVERSE</td>
-                        <td>Strategy is just pivoting with extra steps</td>
-                    </tr>
-                    <tr>
-                        <td>null</td>
-                        <td>MYSPACE</td>
-                        <td>It's basically nothing now</td>
-                    </tr>
-                    <tr>
-                        <td>try/catch</td>
-                        <td>CONGRESSIONAL_HEARING/TAKE_RESPONSIBILITY</td>
-                        <td>The corporate playbook</td>
-                    </tr>
-                    <tr>
-                        <td>this</td>
-                        <td>THE_ZUCC</td>
-                        <td>Self-referential, like the man himself</td>
-                    </tr>
-                    <tr>
-                        <td>throw</td>
-                        <td>BLAME_RUSSIA</td>
-                        <td>When in doubt...</td>
-                    </tr>
-                    <tr>
-                        <td>const</td>
-                        <td>IMMUTABLE_LIKE_MY_HAIR</td>
-                        <td>Some things never change</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h2>Installation</h2>
+
+            <div class="php-requirement">
+                <span class="php-icon">PHP</span>
+                <div>
+                    <strong>Requires PHP 8.1+</strong>
+                    <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Because we need the latest features to harvest your data efficiently.</p>
+                </div>
+            </div>
+
+            <div class="install-grid">
+                <div class="install-card">
+                    <div class="install-icon">git</div>
+                    <h4>Clone from GitHub</h4>
+                    <p>The classic approach</p>
+                    <span class="status available">AVAILABLE</span>
+                </div>
+                <div class="install-card">
+                    <div class="install-icon">composer</div>
+                    <h4>Composer Global</h4>
+                    <p>composer global require</p>
+                    <span class="status soon">SOON</span>
+                </div>
+                <div class="install-card">
+                    <div class="install-icon">docker</div>
+                    <h4>Docker</h4>
+                    <p>Containerized harvesting</p>
+                    <span class="status soon">SOON</span>
+                </div>
+            </div>
+
+            <div class="code-block" style="background: #0D1117;">
+<span class="comment"># Clone the repo</span>
+git clone https://github.com/jayzalowitz/zucksharp.git
+cd zucksharp
+
+<span class="comment"># Make it executable</span>
+chmod +x bin/zuck
+
+<span class="comment"># Run your first program</span>
+./bin/zuck examples/hello.zuck
+
+<span class="comment"># Or enter REPL mode</span>
+./bin/zuck
+
+<span class="comment"># Debug mode for maximum data harvesting visibility</span>
+./bin/zuck --debug examples/fizzbuzz.zuck
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Try Zuck# (Interactive Playground)</h2>
+            <p>Write code below and click "HARVEST" to see what happens. Your code is safe with us. Trust us.</p>
+
+            <div class="playground-container">
+                <div class="playground-header">
+                    <span>Load Example:</span>
+                    <select id="example-select" onchange="loadExample()">
+                        <option value="">-- Select --</option>
+                        <option value="hello">Hello World</option>
+                        <option value="variables">Variables</option>
+                        <option value="conditional">Conditionals</option>
+                        <option value="loop">Loops</option>
+                        <option value="fizzbuzz">FizzBuzz</option>
+                    </select>
+                </div>
+                <textarea class="playground-editor" id="playground-code" placeholder="STEAL_DATA $message = &quot;Hello, Senator!&quot;;
+SENATOR_WE_RUN_ADS $message;"></textarea>
+                <div class="playground-controls">
+                    <button class="playground-btn run" onclick="runPlayground()">HARVEST (Run)</button>
+                    <button class="playground-btn clear" onclick="clearPlayground()">SHADOWBAN (Clear)</button>
+                </div>
+                <div class="playground-output" id="playground-output">// Output will appear here after harvesting...</div>
+                <div class="playground-stats" id="playground-stats"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Complete Keyword Reference</h2>
+            <p>Every PHP keyword, reimagined for maximum engagement. Use the search to find what you need.</p>
+
+            <input type="text" class="search-box" id="keyword-search" placeholder="Search keywords (e.g., PIVOT, DATA, CONGRESSIONAL)..." oninput="filterKeywords()">
+
+            <!-- Control Flow -->
+            <div class="collapsible open" id="collapsible-control">
+                <div class="collapsible-header" onclick="toggleCollapsible('control')">
+                    <span>Control Flow (if, else, loops)</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>if</td><td>PIVOT_TO_VIDEO</td><td>Remember when video was the strategy?</td></tr>
+                        <tr><td>elseif</td><td>PIVOT_TO_REELS</td><td>Then Reels happened</td></tr>
+                        <tr><td>else</td><td>PIVOT_TO_METAVERSE</td><td>The current pivot</td></tr>
+                        <tr><td>endif</td><td>END_PIVOT</td><td>Done pivoting (for now)</td></tr>
+                        <tr><td>while</td><td>MOVE_FAST</td><td>The motto</td></tr>
+                        <tr><td>endwhile</td><td>BREAK_THINGS</td><td>The other half of the motto</td></tr>
+                        <tr><td>for</td><td>GROWTH_HACK</td><td>Gotta get those DAUs</td></tr>
+                        <tr><td>endfor</td><td>PLATEAU</td><td>Growth has limits (allegedly)</td></tr>
+                        <tr><td>foreach</td><td>HARVEST_USERS</td><td>Iterate through your userbase</td></tr>
+                        <tr><td>endforeach</td><td>USERS_HARVESTED</td><td>Done harvesting</td></tr>
+                        <tr><td>switch</td><td>A_B_TEST</td><td>Test all the variants</td></tr>
+                        <tr><td>case</td><td>VARIANT</td><td>One possible path</td></tr>
+                        <tr><td>default</td><td>CONTROL_GROUP</td><td>The baseline</td></tr>
+                        <tr><td>break</td><td>RAGE_QUIT</td><td>Exit the loop angrily</td></tr>
+                        <tr><td>continue</td><td>SCROLL_PAST</td><td>Skip to next iteration</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Variables & Types -->
+            <div class="collapsible" id="collapsible-variables">
+                <div class="collapsible-header" onclick="toggleCollapsible('variables')">
+                    <span>Variables & Types</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>$var =</td><td>STEAL_DATA</td><td>Honesty is the best policy</td></tr>
+                        <tr><td>const</td><td>IMMUTABLE_LIKE_MY_HAIR</td><td>Some things never change</td></tr>
+                        <tr><td>array</td><td>SOCIAL_GRAPH</td><td>It's all connected</td></tr>
+                        <tr><td>string</td><td>STATUS_UPDATE</td><td>What you're thinking</td></tr>
+                        <tr><td>int</td><td>DAILY_ACTIVE_USERS</td><td>The only number that matters</td></tr>
+                        <tr><td>float</td><td>STOCK_PRICE</td><td>Fluctuates wildly</td></tr>
+                        <tr><td>bool</td><td>FACT_CHECK</td><td>True or false (mostly false)</td></tr>
+                        <tr><td>true</td><td>CONNECTED</td><td>Facebook's whole thing</td></tr>
+                        <tr><td>false</td><td>DISCONNECTED</td><td>The opposite</td></tr>
+                        <tr><td>null</td><td>MYSPACE</td><td>Dead and empty</td></tr>
+                        <tr><td>global</td><td>WORLDWIDE_EXCEPT_CHINA</td><td>Almost global</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Functions & Classes -->
+            <div class="collapsible" id="collapsible-functions">
+                <div class="collapsible-header" onclick="toggleCollapsible('functions')">
+                    <span>Functions & Classes</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>function</td><td>FEATURE</td><td>Ship features</td></tr>
+                        <tr><td>return</td><td>IPO</td><td>The ultimate return</td></tr>
+                        <tr><td>class</td><td>CORPORATION</td><td>Basically the same thing</td></tr>
+                        <tr><td>new</td><td>ACQUIRE</td><td>How Meta gets things</td></tr>
+                        <tr><td>public</td><td>OPEN_GRAPH</td><td>Remember that API?</td></tr>
+                        <tr><td>private</td><td>SHADOW_PROFILE</td><td>The secret data</td></tr>
+                        <tr><td>protected</td><td>FRIENDS_ONLY</td><td>Limited visibility</td></tr>
+                        <tr><td>static</td><td>DATACENTER</td><td>Always there</td></tr>
+                        <tr><td>this</td><td>THE_ZUCC</td><td>Self-reference</td></tr>
+                        <tr><td>self</td><td>FACEBOOK_PROPER</td><td>Static self-reference</td></tr>
+                        <tr><td>parent</td><td>HARVARD_DROPOUT</td><td>Where it all began</td></tr>
+                        <tr><td>extends</td><td>ACQUIRES</td><td>Class inheritance (corporate style)</td></tr>
+                        <tr><td>implements</td><td>COPIES</td><td>Interface implementation</td></tr>
+                        <tr><td>interface</td><td>REGULATION</td><td>Rules to follow (maybe)</td></tr>
+                        <tr><td>abstract</td><td>METAVERSE_CONCEPT</td><td>Exists in theory</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Operators -->
+            <div class="collapsible" id="collapsible-operators">
+                <div class="collapsible-header" onclick="toggleCollapsible('operators')">
+                    <span>Operators</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>==</td><td>IS_CONNECTED_TO</td><td>Are they friends?</td></tr>
+                        <tr><td>!=</td><td>UNFRIENDED</td><td>Not anymore</td></tr>
+                        <tr><td>&&</td><td>AND_ALSO_YOUR_DATA</td><td>We want it all</td></tr>
+                        <tr><td>||</td><td>OR_YOUR_FRIENDS_DATA</td><td>Them too</td></tr>
+                        <tr><td>!</td><td>FAKE_NEWS</td><td>Logical NOT</td></tr>
+                        <tr><td>++</td><td>ENGAGEMENT</td><td>More is always better</td></tr>
+                        <tr><td>--</td><td>CHURN</td><td>Users leaving</td></tr>
+                        <tr><td>+</td><td>MERGE</td><td>Addition (like companies)</td></tr>
+                        <tr><td>-</td><td>DIVEST</td><td>Subtraction</td></tr>
+                        <tr><td>*</td><td>SCALE</td><td>Multiplication at scale</td></tr>
+                        <tr><td>/</td><td>SPLIT</td><td>Division</td></tr>
+                        <tr><td>%</td><td>REMAINDER_OF_PRIVACY</td><td>What's left of your privacy</td></tr>
+                        <tr><td>[]</td><td>TIMELINE</td><td>Array access</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Error Handling & I/O -->
+            <div class="collapsible" id="collapsible-errors">
+                <div class="collapsible-header" onclick="toggleCollapsible('errors')">
+                    <span>Error Handling & I/O</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>echo</td><td>SENATOR_WE_RUN_ADS</td><td>The answer to everything</td></tr>
+                        <tr><td>print</td><td>POKE</td><td>Remember poking?</td></tr>
+                        <tr><td>try</td><td>CONGRESSIONAL_HEARING</td><td>Where exceptions happen</td></tr>
+                        <tr><td>catch</td><td>TAKE_RESPONSIBILITY</td><td>(sort of)</td></tr>
+                        <tr><td>throw</td><td>BLAME_RUSSIA</td><td>The classic move</td></tr>
+                        <tr><td>die/exit</td><td>SHUTDOWN_LIKE_VINE</td><td>Exit program</td></tr>
+                        <tr><td>require</td><td>ACQUIRE_TALENT</td><td>Include (mandatory)</td></tr>
+                        <tr><td>include</td><td>COPY_FROM_SNAPCHAT</td><td>Include (optional)</td></tr>
+                        <tr><td>//</td><td>REDACTED</td><td>Comments are redacted</td></tr>
+                        <tr><td>/* */</td><td>TERMS_OF_SERVICE...END_TOS</td><td>Multi-line (nobody reads)</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Built-in Functions -->
+            <div class="collapsible" id="collapsible-builtins">
+                <div class="collapsible-header" onclick="toggleCollapsible('builtins')">
+                    <span>Built-in Functions</span>
+                    <span class="arrow">V</span>
+                </div>
+                <div class="collapsible-content">
+                    <table class="keyword-table">
+                        <tr><td>readline</td><td>COLLECT()</td><td>Read user input</td></tr>
+                        <tr><td>strval</td><td>MONETIZE($data)</td><td>Convert to string (monetize everything)</td></tr>
+                        <tr><td>count</td><td>COUNT_USERS($array)</td><td>Count array elements</td></tr>
+                        <tr><td>print_r</td><td>BOOST($post)</td><td>Output with extra formatting</td></tr>
+                        <tr><td>sort</td><td>ALGORITHM($array)</td><td>Sort (mysteriously)</td></tr>
+                        <tr><td>unset</td><td>SHADOWBAN($var)</td><td>Unset variable</td></tr>
+                        <tr><td>boolval</td><td>FACT_CHECK_THIS($val)</td><td>Check if value is truthy</td></tr>
+                        <tr><td>time</td><td>TIME_ON_PLATFORM()</td><td>Current timestamp</td></tr>
+                        <tr><td>rand</td><td>RANDOM_AD()</td><td>Random number</td></tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>When Things Go Wrong (Congressional Transcript)</h2>
+            <p>Error handling in Zuck# follows the corporate playbook. Here's how exceptions work:</p>
+
+            <div class="code-block">
+<span class="keyword">CONGRESSIONAL_HEARING</span> {
+    <span class="comment">REDACTED Something risky happens here</span>
+    <span class="keyword">STEAL_DATA</span> <span class="variable">$data</span> = dangerousOperation();
+
+    <span class="keyword">PIVOT_TO_VIDEO</span> (<span class="variable">$data</span> <span class="keyword">IS_CONNECTED_TO</span> <span class="keyword">MYSPACE</span>) {
+        <span class="keyword">BLAME_RUSSIA</span> <span class="keyword">ACQUIRE</span> Exception(<span class="string">"Data breach detected!"</span>);
+    } <span class="keyword">END_PIVOT</span>
+
+} <span class="keyword">TAKE_RESPONSIBILITY</span> (Exception <span class="variable">$e</span>) {
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"We take this very seriously.\n"</span>;
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"Error: "</span> . <span class="variable">$e</span>->getMessage() . <span class="string">"\n"</span>;
+    <span class="keyword">SENATOR_WE_RUN_ADS</span> <span class="string">"We are committed to doing better.\n"</span>;
+}
+            </div>
+
+            <div class="transcript-box">
+                <div class="transcript-header">Congressional Hearing - Runtime Exception</div>
+                <div class="transcript-line">
+                    <span class="transcript-speaker">SENATOR:</span> Mr. Zuckerberg, can you explain this error?
+                </div>
+                <div class="transcript-error">
+                    Exception: Data breach detected!
+                    at line 7 in your_program.zuck
+                </div>
+                <div class="transcript-line">
+                    <span class="transcript-speaker">THE_ZUCC:</span> Senator, we run ads. Also, we're looking into it.
+                </div>
+                <div class="transcript-line">
+                    <span class="transcript-speaker">SYSTEM:</span> TAKE_RESPONSIBILITY block executed. Continuing...
+                </div>
+                <div class="transcript-line" style="opacity: 0.6; font-style: italic;">
+                    *blinks manually*
+                </div>
+            </div>
         </section>
 
         <section class="section">
@@ -452,7 +1149,7 @@
             </div>
 
             <div class="roadmap-item">
-                <span class="status-badge soon">SOON™</span>
+                <span class="status-badge soon">SOON</span>
                 <div>
                     <strong>VS Code Extension</strong>
                     <p>Syntax highlighting that tracks your keystrokes</p>
@@ -484,7 +1181,7 @@
             </div>
 
             <div class="roadmap-item">
-                <span class="status-badge soon">SOON™</span>
+                <span class="status-badge soon">SOON</span>
                 <div>
                     <strong>AI Code Completion</strong>
                     <p>Powered by all the code we definitely didn't scrape</p>
@@ -514,35 +1211,6 @@
                 <div class="testimonial-author">
                     - Tom (from MySpace, probably)
                 </div>
-            </div>
-        </section>
-
-        <section class="cta-section">
-            <h2>Ready to Move Fast and Break Things?</h2>
-            <p>Clone the repo. Read the spec. Join the 3 billion users we definitely have.</p>
-            <a href="https://github.com/jayzalowitz/zucksharp" class="cta-button">STEAL_DATA from GitHub</a>
-            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">By clicking this button, you agree to let us know everything about you forever.</p>
-        </section>
-
-        <section class="section">
-            <h2>Quick Start</h2>
-            <p>Get up and running in seconds. Requires PHP 8.1+.</p>
-            <div class="code-block" style="background: #0D1117;">
-<span class="comment"># Clone the repo</span>
-git clone https://github.com/jayzalowitz/zucksharp.git
-cd zucksharp
-
-<span class="comment"># Make it executable</span>
-chmod +x bin/zuck
-
-<span class="comment"># Run your first program</span>
-./bin/zuck examples/hello.zuck
-
-<span class="comment"># Or enter REPL mode</span>
-./bin/zuck
-
-<span class="comment"># Debug mode for maximum data harvesting visibility</span>
-./bin/zuck --debug examples/fizzbuzz.zuck
             </div>
         </section>
 
@@ -639,6 +1307,35 @@ chmod +x bin/zuck
             </div>
         </section>
 
+        <section class="cta-section">
+            <h2>Ready to Move Fast and Break Things?</h2>
+            <p>Clone the repo. Read the spec. Join the 3 billion users we definitely have.</p>
+            <a href="https://github.com/jayzalowitz/zucksharp" class="cta-button">STEAL_DATA from GitHub</a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">By clicking this button, you agree to let us know everything about you forever.</p>
+        </section>
+
+        <section class="section">
+            <h2>Join the Community</h2>
+            <p>We'd love to harvest your contributions! Here's how you can get involved:</p>
+
+            <div class="community-links">
+                <a href="https://github.com/jayzalowitz/zucksharp" class="community-link">
+                    Star on GitHub
+                </a>
+                <a href="https://github.com/jayzalowitz/zucksharp/issues/new" class="community-link">
+                    Submit a Keyword Idea
+                </a>
+                <a href="https://github.com/jayzalowitz/zucksharp/pulls" class="community-link">
+                    Open a PR
+                </a>
+                <a href="https://github.com/jayzalowitz/zucksharp/issues" class="community-link">
+                    Report a Bug
+                </a>
+            </div>
+
+            <p style="margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">Remember: Done is better than perfect. Ship it!</p>
+        </section>
+
         <footer class="footer">
             <p>Zuck# is a satirical project. No actual data was harvested in the making of this language.</p>
             <p style="font-size: 0.7rem; margin-top: 0.5rem;">(That we'll admit to)</p>
@@ -652,6 +1349,34 @@ chmod +x bin/zuck
     </div>
 
     <script>
+        // Zuck Facts for rotating banner
+        const zuckFacts = [
+            "Did you know? MYSPACE returns null because it's basically dead.",
+            "Fun fact: THE_ZUCC is how you reference yourself. THE_ZUCC never changes.",
+            "Tip: SWEET_BABY_RAYS always returns 'BBQ'. This is non-negotiable.",
+            "Warning: SHADOW_PROFILE variables can see everything but nobody can see them.",
+            "Pro tip: BLAME_RUSSIA works for any exception. Any. Exception.",
+            "Remember: MOVE_FAST always ends with BREAK_THINGS. It's company policy.",
+            "Did you know? CONGRESSIONAL_HEARING catches exceptions AND prepares statements.",
+            "Fun fact: ACQUIRE is for objects. ACQUIRE is also for companies. Coincidence?",
+            "Tip: Use PIVOT_TO_REELS when PIVOT_TO_VIDEO doesn't work anymore.",
+            "Warning: DATACENTER variables never garbage collect. We keep everything.",
+            "Pro tip: ENGAGEMENT++ is always the answer. Always.",
+            "Remember: IMMUTABLE_LIKE_MY_HAIR means it never changes. Ever."
+        ];
+
+        let factIndex = 0;
+        const factElement = document.getElementById('zuck-fact');
+
+        setInterval(() => {
+            factIndex = (factIndex + 1) % zuckFacts.length;
+            factElement.style.opacity = 0;
+            setTimeout(() => {
+                factElement.textContent = zuckFacts[factIndex];
+                factElement.style.opacity = 1;
+            }, 300);
+        }, 7000);
+
         // "Track" various fake things for comedic effect
         const trackingMessages = [
             "your mouse movements",
@@ -665,7 +1390,10 @@ chmod +x bin/zuck
             "your congressional testimony",
             "your metaverse avatar ideas",
             "absolutely everything",
-            "your reaction to this message"
+            "your reaction to this message",
+            "how long you stared at this",
+            "your keyboard shortcuts",
+            "your dark mode preference"
         ];
 
         let currentIndex = 0;
@@ -675,6 +1403,24 @@ chmod +x bin/zuck
             currentIndex = (currentIndex + 1) % trackingMessages.length;
             tracker.innerHTML = `We're tracking: <strong>${trackingMessages[currentIndex]}</strong>`;
         }, 3000);
+
+        // Mobile responsive tracker
+        function handleMobileTracker() {
+            const tracker = document.getElementById('tracker');
+            const mobileTracker = document.getElementById('tracker-mobile');
+            if (window.innerWidth <= 600) {
+                tracker.style.display = 'none';
+                mobileTracker.style.display = 'block';
+                setInterval(() => {
+                    mobileTracker.innerHTML = `We're tracking: <strong>${trackingMessages[currentIndex]}</strong>`;
+                }, 3000);
+            } else {
+                tracker.style.display = 'block';
+                mobileTracker.style.display = 'none';
+            }
+        }
+        handleMobileTracker();
+        window.addEventListener('resize', handleMobileTracker);
 
         // Easter egg: Konami code shows a special message
         let konamiCode = [];
@@ -688,6 +1434,210 @@ chmod +x bin/zuck
                 alert('SENATOR_WE_RUN_ADS "You found the secret! Your reward: more ads."');
             }
         });
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            const body = document.body;
+            const html = document.documentElement;
+            const btn = document.getElementById('dark-mode-toggle');
+
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btn.textContent = 'PIVOT_TO_DARK_MODE';
+                localStorage.setItem('zucksharp-theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.textContent = 'PIVOT_TO_LIGHT_MODE';
+                localStorage.setItem('zucksharp-theme', 'dark');
+            }
+        }
+
+        // Load saved theme preference
+        (function() {
+            const savedTheme = localStorage.getItem('zucksharp-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('dark-mode-toggle').textContent = 'PIVOT_TO_LIGHT_MODE';
+            }
+        })();
+
+        // Collapsible sections
+        function toggleCollapsible(id) {
+            const el = document.getElementById('collapsible-' + id);
+            el.classList.toggle('open');
+        }
+
+        // Keyword search/filter
+        function filterKeywords() {
+            const query = document.getElementById('keyword-search').value.toLowerCase();
+            const tables = document.querySelectorAll('.keyword-table');
+
+            tables.forEach(table => {
+                const rows = table.querySelectorAll('tr');
+                let hasVisible = false;
+
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(query) || query === '') {
+                        row.style.display = '';
+                        hasVisible = true;
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+
+                // Open parent collapsible if has visible rows
+                const collapsible = table.closest('.collapsible');
+                if (hasVisible && query !== '') {
+                    collapsible.classList.add('open');
+                }
+            });
+        }
+
+        // Playground functionality
+        const playgroundExamples = {
+            hello: `<?zuck
+
+SENATOR_WE_RUN_ADS "Hello, World!\\n";
+SENATOR_WE_RUN_ADS "Your data is safe with us. Trust us.\\n";
+
+?>`,
+            variables: `<?zuck
+
+STEAL_DATA $name = "Mark";
+STEAL_DATA $isHuman = CONNECTED;
+STEAL_DATA $empathy = MYSPACE;
+
+SENATOR_WE_RUN_ADS "Name: " . $name . "\\n";
+SENATOR_WE_RUN_ADS "Human: " . $isHuman . "\\n";
+
+?>`,
+            conditional: `<?zuck
+
+STEAL_DATA $stockPrice = 250;
+
+PIVOT_TO_VIDEO ($stockPrice > 300) {
+    SENATOR_WE_RUN_ADS "Shareholders happy!\\n";
+} PIVOT_TO_REELS ($stockPrice > 200) {
+    SENATOR_WE_RUN_ADS "Could be worse.\\n";
+} PIVOT_TO_METAVERSE {
+    SENATOR_WE_RUN_ADS "Time to pivot!\\n";
+} END_PIVOT
+
+?>`,
+            loop: `<?zuck
+
+SENATOR_WE_RUN_ADS "Counting users...\\n";
+
+GROWTH_HACK ($i = 1; $i <= 5; $i ENGAGEMENT) {
+    SENATOR_WE_RUN_ADS "User " . $i . " harvested\\n";
+} PLATEAU
+
+SENATOR_WE_RUN_ADS "Done harvesting!\\n";
+
+?>`,
+            fizzbuzz: `<?zuck
+
+GROWTH_HACK ($i = 1; $i <= 15; $i ENGAGEMENT) {
+    STEAL_DATA $by3 = ($i REMAINDER_OF_PRIVACY 3) IS_CONNECTED_TO 0;
+    STEAL_DATA $by5 = ($i REMAINDER_OF_PRIVACY 5) IS_CONNECTED_TO 0;
+
+    PIVOT_TO_VIDEO ($by3 AND_ALSO_YOUR_DATA $by5) {
+        SENATOR_WE_RUN_ADS "PivotAcquire\\n";
+    } PIVOT_TO_REELS ($by3) {
+        SENATOR_WE_RUN_ADS "Pivot\\n";
+    } PIVOT_TO_REELS ($by5) {
+        SENATOR_WE_RUN_ADS "Acquire\\n";
+    } PIVOT_TO_METAVERSE {
+        SENATOR_WE_RUN_ADS $i . "\\n";
+    } END_PIVOT
+} PLATEAU
+
+?>`
+        };
+
+        let dataHarvested = 0;
+
+        function loadExample() {
+            const select = document.getElementById('example-select');
+            const editor = document.getElementById('playground-code');
+            const example = playgroundExamples[select.value];
+            if (example) {
+                editor.value = example;
+            }
+        }
+
+        function runPlayground() {
+            const code = document.getElementById('playground-code').value;
+            const output = document.getElementById('playground-output');
+            const stats = document.getElementById('playground-stats');
+
+            // Show loading state
+            output.innerHTML = '<span class="loading-text">Connecting to data centers</span>';
+
+            setTimeout(() => {
+                output.innerHTML = '<span class="loading-text">Harvesting your code</span>';
+
+                setTimeout(() => {
+                    // Fake execution with satirical output
+                    const lines = code.split('\n').filter(l => l.trim() && !l.includes('<?zuck') && !l.includes('?>') && !l.includes('REDACTED'));
+                    let fakeOutput = '';
+
+                    // Count data harvested
+                    const stealCount = (code.match(/STEAL_DATA/g) || []).length;
+                    const echoCount = (code.match(/SENATOR_WE_RUN_ADS/g) || []).length;
+                    dataHarvested += stealCount * 47 + echoCount * 12 + Math.floor(Math.random() * 100);
+
+                    // Generate fake output based on code content
+                    if (code.includes('Hello')) {
+                        fakeOutput += 'Hello, World!\n';
+                        fakeOutput += 'Your data is safe with us. Trust us.\n';
+                    }
+                    if (code.includes('GROWTH_HACK') || code.includes('MOVE_FAST')) {
+                        fakeOutput += '[Loop detected: Maximum engagement achieved]\n';
+                    }
+                    if (code.includes('PIVOT_TO')) {
+                        fakeOutput += '[Pivoting strategy... strategy pivoted successfully]\n';
+                    }
+                    if (code.includes('PivotAcquire') || code.includes('Pivot') || code.includes('Acquire')) {
+                        const fizzbuzzOutput = [];
+                        for (let i = 1; i <= 15; i++) {
+                            if (i % 15 === 0) fizzbuzzOutput.push('PivotAcquire');
+                            else if (i % 3 === 0) fizzbuzzOutput.push('Pivot');
+                            else if (i % 5 === 0) fizzbuzzOutput.push('Acquire');
+                            else fizzbuzzOutput.push(i);
+                        }
+                        fakeOutput += fizzbuzzOutput.join('\n') + '\n';
+                    }
+                    if (code.includes('$stockPrice')) {
+                        fakeOutput += 'Could be worse.\n';
+                    }
+                    if (code.includes('harvested')) {
+                        for (let i = 1; i <= 5; i++) {
+                            fakeOutput += `User ${i} harvested\n`;
+                        }
+                        fakeOutput += 'Done harvesting!\n';
+                    }
+
+                    if (!fakeOutput) {
+                        fakeOutput = `[Program executed successfully]\n`;
+                        fakeOutput += `[${stealCount} variables harvested]\n`;
+                        fakeOutput += `[${echoCount} messages broadcast to shareholders]\n`;
+                    }
+
+                    fakeOutput += '\n// Execution complete. Your data has been monetized.';
+
+                    output.textContent = fakeOutput;
+                    stats.innerHTML = `Data points harvested this session: <strong>${dataHarvested.toLocaleString()}</strong> | Engagement: <strong>${Math.floor(Math.random() * 100)}%</strong>`;
+                }, 800);
+            }, 600);
+        }
+
+        function clearPlayground() {
+            document.getElementById('playground-code').value = '';
+            document.getElementById('playground-output').textContent = '// Output will appear here after harvesting...';
+            document.getElementById('playground-stats').innerHTML = '';
+        }
     </script>
 </body>
 </html>
