@@ -2,19 +2,68 @@
 
 > Move Fast and Break Things. Then apologize to Congress about it.
 
-Zuck# is an esoteric programming language inspired by PHP/Hack that pays tribute to (and lightly roasts) Mark Zuckerberg. It's fully functional and can run real programs!
+Zuck# is a PHP-inspired esoteric programming language that pays tribute to (and lightly roasts) Mark Zuckerberg. It's fully functional and can run real programs!
 
-## Quick Start
+**[Live Playground & Documentation](https://jayzalowitz.github.io/zucksharp/)**
+
+## Features
+
+- **Full PHP-like syntax** - Variables, functions, classes, loops, conditionals
+- **Interactive REPL** - Test code in real-time
+- **Hilarious keywords** - `STEAL_DATA`, `SENATOR_WE_RUN_ADS`, `PIVOT_TO_METAVERSE`
+- **Complete OOP support** - Classes, inheritance, visibility modifiers
+- **Error handling** - Try/catch with `CONGRESSIONAL_HEARING` blocks
+
+## Requirements
+
+- **PHP 8.1 or higher**
+- Composer (optional, for development)
+
+## Installation
+
+### Quick Start (No Dependencies)
+
+```bash
+git clone https://github.com/jayzalowitz/zucksharp.git
+cd zucksharp
+chmod +x bin/zuck
+./bin/zuck --help
+```
+
+### Via Composer (Development)
+
+```bash
+git clone https://github.com/jayzalowitz/zucksharp.git
+cd zucksharp
+composer install
+./bin/zuck --help
+```
+
+### Global Installation
+
+```bash
+git clone https://github.com/jayzalowitz/zucksharp.git
+cd zucksharp
+chmod +x bin/zuck
+sudo ln -s $(pwd)/bin/zuck /usr/local/bin/zuck
+```
+
+Now you can run `zuck` from anywhere.
+
+## Usage
 
 ```bash
 # Run a Zuck# program
 ./bin/zuck examples/hello.zuck
 
-# Enter REPL mode
+# Enter REPL mode (interactive)
 ./bin/zuck
 
 # Run with debug output
 ./bin/zuck --debug examples/fizzbuzz.zuck
+
+# Show help
+./bin/zuck --help
 ```
 
 ## Hello World
@@ -167,51 +216,84 @@ STEAL_DATA $user = SOCIAL_GRAPH[
 
 ## Built-in Functions
 
-- `COLLECT()` - Read user input
-- `MONETIZE($val)` - Convert to string
-- `COUNT_USERS($arr)` - Count array elements
-- `BOOST($msg)` - Print with emphasis
-- `ALGORITHM($arr)` - Sort (mysteriously)
-- `SHADOWBAN($var)` - Unset variable
-- `FACT_CHECK_THIS($val)` - Check truthiness
-- `TIME_ON_PLATFORM()` - Current timestamp
-- `RANDOM_AD()` - Random number
+| Function | Description |
+|----------|-------------|
+| `COLLECT()` | Read user input |
+| `MONETIZE($val)` | Convert to string |
+| `COUNT_USERS($arr)` | Count array elements |
+| `BOOST($msg)` | Print with emphasis |
+| `ALGORITHM($arr)` | Sort (mysteriously) |
+| `SHADOWBAN($var)` | Unset variable |
+| `FACT_CHECK_THIS($val)` | Check truthiness |
+| `TIME_ON_PLATFORM()` | Current timestamp |
+| `RANDOM_AD()` | Random number |
+
+## Architecture
+
+The interpreter consists of three main components:
+
+```
+src/
+├── Lexer.php       # Tokenizes Zuck# source code
+├── Parser.php      # Builds AST from tokens
+├── Interpreter.php # Executes the AST
+└── ZuckSharp.php   # Main entry point
+```
 
 ## Examples
 
 See the `examples/` directory:
 
-- `hello.zuck` - Hello World
-- `variables.zuck` - Variable usage
-- `loops.zuck` - Loop examples
-- `conditionals.zuck` - If/else examples
-- `functions.zuck` - Function definitions
-- `classes.zuck` - Class/object examples
-- `error_handling.zuck` - Try/catch
-- `fizzbuzz.zuck` - Classic FizzBuzz
+| File | Description |
+|------|-------------|
+| `hello.zuck` | Hello World |
+| `variables.zuck` | Variable usage |
+| `loops.zuck` | Loop examples |
+| `conditionals.zuck` | If/else examples |
+| `functions.zuck` | Function definitions |
+| `classes.zuck` | Class/object examples |
+| `error_handling.zuck` | Try/catch |
+| `fizzbuzz.zuck` | Classic FizzBuzz |
 
-## Requirements
+## Development
 
-- PHP 8.1 or higher
-
-## Installation
+### Running Tests
 
 ```bash
-git clone <this-repo>
-cd zucksharp
-chmod +x bin/zuck
-./bin/zuck --help
+composer test
+# or
+./vendor/bin/phpunit
 ```
+
+### Code Quality
+
+```bash
+# Lint check
+composer lint
+
+# Auto-fix lint issues
+composer lint:fix
+
+# Static analysis
+composer analyze
+```
+
+### CI/CD
+
+This project uses GitHub Actions for:
+- Running tests on PHP 8.1, 8.2, and 8.3
+- Code style checking with PHP CS Fixer
+- Static analysis with PHPStan
+
+## Contributing
+
+We'd love to harvest your contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+Remember: Done is better than perfect.
 
 ## License
 
 MIT License - Move fast and don't worry about licensing.
-
-## Contributing
-
-We'd love to harvest your contributions! Please submit a PR.
-
-Remember: Done is better than perfect.
 
 ---
 
